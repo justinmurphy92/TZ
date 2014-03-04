@@ -115,7 +115,7 @@ font-family:Georgia, "Times New Roman", serif;
 header .list{
 position:relative;
 top:-25px;
-width:230px;
+text-align: center;
 background:#fff;
 padding:7px 10px;
 border:1px solid #ddd;
@@ -123,9 +123,13 @@ box-shadow:0px 1px 2px #ddd;
 border-top:none;
 border-bottom-left-radius:10px;
 border-bottom-right-radius:10px;
-font-size:12px;
-line-height:20px;
+font-size:15px;
+line-height:30px;
 color:#777;
+}
+
+header .list i{
+padding-right:15px;
 }
 
 header .list hr{
