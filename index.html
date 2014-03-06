@@ -15,6 +15,7 @@
   <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
 
   <!-- Stylesheets -->
+   <link href="style/smoothness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
   <link href="style/bootstrap.css" rel="stylesheet">
   <link href="style/slider.css" rel="stylesheet">
   <link href="style/prettyPhoto.css" rel="stylesheet">
@@ -34,6 +35,7 @@
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="img/favicon/favicon.ico">
+
 </head>
 
 <body>
@@ -65,6 +67,18 @@
                <div class="schedule">
                   <i class="icon-calendar color"></i> 5 Lessons < 24 hours
                </div>
+                <hr />
+                <!-- User Schedule -->
+                <div class="search">
+                    <form role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" style="background-color: lavender;"><i style="margin:auto;" class="icon-search color"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
          </div>
       </div>
@@ -80,7 +94,7 @@
     <div class="navbar bs-docs-nav" role="banner">
       
         <div class="container">
-          <div class="navbar-header">
+         <div class="navbar-header">
 			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
@@ -90,10 +104,10 @@
 		  </div>
           <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <!-- Navigation links starts here -->
-            <ul class="nav navbar-nav">
+             <ul class="nav navbar-nav">
               <!-- Main menu -->
-              <li><a href="index.html">Home #1</a></li>
-              <li><a href="index1.html">Home #2</a></li>
+              <li><a href="index.html"> Home </a></li>
+              <li><a href="lessons.html"> Lessons </a></li>
               <!-- Navigation with sub menu. Please note down the syntax before you need. Each and every link is important. -->
              
               
@@ -234,7 +248,7 @@
               <div class="row">
                 <div class="col-md-7">
                   <h2>TutleZone</h2>
-                  <p class="main-meta"> Because tutoring is hard  </p>
+                  <p class="main-meta"> Because tutoring is hard </p>
                     <p> Tutoring ain't easy, and neither is learning! As guitar teachers ourselves, we know how difficult it can be to keep track of lessons, assignments, payments, rescheduling, etc. and unfortunately
                      it just comes along with the business. To be completely honest, we designed TutleZone for ourselves, so we could stay focused on helping others learn, rather than master our excel abilities. We hope you can benefit from TutleZone the same way we have.
                      We hope you consider signing up for TutleZone, and hopefully you remain forgiving while we're within the growing stages. We're open to feedback, let us know what's broken or what you want and we'll do what we can
@@ -431,6 +445,7 @@
 
 <script src="js/jquery.cslider.js"></script>
 <script src="js/modernizr.custom.28468.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="js/custom.js"></script>
 		<script type="text/javascript">
 			$(function() {
@@ -441,6 +456,37 @@
 				});
 			
 			});
-		</script>	
+		</script>
+<script>
+    $(function() {
+        var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+        ];
+        $("#search").autocomplete({
+            source: availableTags
+        });
+    });
+</script>
 </body>
 </html>
