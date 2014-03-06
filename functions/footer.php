@@ -130,9 +130,10 @@ function displayFooter($userType) {
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                editable: true,
+                editable:false,
                 events: [
                     {
+
                         title: 'All Day Event',
                         start: new Date(y, m, 1)
                     },
@@ -159,6 +160,7 @@ function displayFooter($userType) {
                         allDay: false
                     },
                     {
+                        draggable: false,
                         title: 'Lunch',
                         start: new Date(y, m, d, 12, 0),
                         end: new Date(y, m, d, 14, 0),

@@ -26,8 +26,8 @@ function displayNavigation($userType) {
                 <!-- Navigation links starts here -->
                 <ul class="nav navbar-nav">
                     <!-- Main menu -->
-                    <li><a href="index.html"> Home </a></li>
-                    <li><a href="lessons.html"> Lessons </a></li>
+                    <li><a href="index.php"> Home </a></li>
+                    <li><a href="lessons.php"> Lessons </a></li>
                     <!-- Navigation with sub menu. Please note down the syntax before you need. Each and every link is important. -->
 
 
