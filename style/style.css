@@ -128,8 +128,9 @@ line-height:30px;
 color:#777;
 }
 
-header .list i{
-padding-right:15px;
+header .list span{
+margin-right:15px;
+font-size:13px
 }
 
 header .list hr{

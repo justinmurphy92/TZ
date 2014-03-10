@@ -28,12 +28,16 @@ function displayUserArea($userID) {
                         <hr />
                         <!-- User Notifications -->
                         <div class="notification">
-                            <i class="icon-envelope-alt color"></i> X New Notifications
+                            <i class="icon-envelope-alt color"></i>
+                            <span class="label label-danger">8</span>
+                            New Notifications
                         </div>
                         <hr />
                         <!-- User Schedule -->
                         <div class="schedule">
-                            <i class="icon-calendar color"></i> 5 Lessons < 24 hours
+                            <i class="icon-calendar color"></i>
+                            <span class="label label-warning">10</span>
+                            Lessons < 24 hours
                         </div>
                         <hr />
                         <!-- User Schedule -->

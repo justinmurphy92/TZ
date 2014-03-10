@@ -9,6 +9,8 @@ include('functions/footer.php');
 include('functions/header.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
+include('functions/database.php');
+
 
 displayHeader('TutleZone - Home');
 displayUserArea(0);
@@ -112,7 +114,7 @@ displayNavigation(0);
                         <div class="afeature">
                             <div class="afmatter">
                                 <i class="icon-calendar"></i>
-                                <h4>Schedule</h4>
+                                <h4>Scheduling</h4>
                                 <p>Never forget a lesson again.  The TutleZone calendar consolidates all your lessons in one place. </p>
                             </div>
                         </div>
@@ -155,32 +157,31 @@ displayNavigation(0);
                 <div class="testimonial">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4 col-sm-4">
-                                <!-- Testimonial #1 -->
-                                <div class="test">
-                                    I used TutleZone once.  <br/>It was okay.
-                                </div>
-                                <div class="test-arrow"></div>
-                                <div class="tauth"><i class="icon-user"></i> Ravi G <span class="color">Tutor</span></div>
-                            </div>
+                            <?php
+                            $db = connectToDB();
+                            if (!$db)
+                            {
+                              try{
+                                  $sql = "SELECT * FROM TESTIMONIALS ORDER BY RAND() LIMIT 3";
+                                  foreach ($db->query($sql) as $row)
+                                  {
+                                      echo "<div class='col-md-4 col-sm-4'>";
+                                      echo "<div class='test'>";
+                                      echo $row['content'];
+                                      echo "</div>";
+                                      echo "<div class='test-arrow'></div>";
+                                      echo "<div class='tauth'><i class='icon-user'></i>";
+                                      echo $row['name'];
+                                      echo "<span class='color'>";
+                                      echo $row['vistor_type'];
+                                      echo "</span></div></div>";
+                                  }
 
-                            <div class="col-md-4 col-sm-4">
-                                <!-- Testimonial #2 -->
-                                <div class="test">
-                                    1) TutleZone ...<br/>  2) Register ...<br/> 3) ??? ... <br/>4) Profit.
-                                </div>
-                                <div class="test-arrow"></div>
-                                <div class="tauth"><i class="icon-user"></i> Reginald P Murphy <span class="color">Student</span></div>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4">
-                                <!-- Testimonial #3 -->
-                                <div class="test">
-                                    As the old yiddish proverb goes, once you Tutle you'll never go back.
-                                </div>
-                                <div class="test-arrow"></div>
-                                <div class="tauth"><i class="icon-user"></i> Anonymous <span class="color">Guest</span></div>
-                            </div>
+                              }catch(PDOException $e){
+                                echo $e->getMessage();
+                              }
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
