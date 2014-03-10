@@ -187,10 +187,6 @@ displayNavigation(0);
                 </div>
 
                 <div class="bor"></div>
-
-
-
-
             </div>
         </div>
     </div>

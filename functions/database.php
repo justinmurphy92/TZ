@@ -12,17 +12,17 @@ function writeLog($errorString){
 
 function connectToDB() {
     try{
-        $DBcon = new PDO('mysql:host=127.0.0.1;dbname=tz', 'root', '');
+        $DBcon = new PDO('mysql:host=127.0.0.1;dbname=tutlezone', 'root', '');
 
     }
     catch (PDOException $e){
         $date = new DateTime();
         $writeQueue = null;
-        $this->error =$e->getMessage();
+        $error =$e->getMessage();
 
         $timestamp = $date->getTimestamp();
 
-        $writeQueue = "DB_ERROR ->" . $timestamp . ': '. $this->error . '\n';
+        $writeQueue = "DB_ERROR ->" . $timestamp . ': '. $error . '\n';
 
         writelog($writeQueue);
         return false;
