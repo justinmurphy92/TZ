@@ -18,6 +18,7 @@ function connectToDB() {
     catch (PDOException $e){
         $date = new DateTime();
         $writeQueue = null;
+        //made minor change.
         $error =$e->getMessage();
 
         $timestamp = $date->getTimestamp();
