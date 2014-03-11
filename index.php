@@ -178,7 +178,7 @@ displayNavigation(0);
                                   }
 
                               }catch(PDOException $e){
-                                writeLog('DB', $e->getMessage());
+                                writeLog('DB', $e);
                               }
                             }
                             ?>

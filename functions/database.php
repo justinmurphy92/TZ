@@ -9,10 +9,9 @@
 define("DB", "DB ERROR");
 define("UNDEFINED", "MISC ERROR");
 
-function writeLog($errorClass, $error){
+function writeLog($errorClass, $e){
     $FILENAME = 'tzLog.txt';
-    $date = new DateTime();
-    $timestamp = $date->getTimestamp();
+    $timestamp = date('F dS Y h:i:s');
     switch($errorClass)
     {
         case 'DB':
@@ -22,21 +21,23 @@ function writeLog($errorClass, $error){
             $errorClass = UNDEFINED;
             break;
     }
-
-    $writeQueue = $errorClass . " -> " . $timestamp . ": " . $error . "\n";
+    $error = $e->getFile()." ". $e->getLine(). "\n MESSAGE: ". $e->getMessage() ."\n";
+    $writeQueue = "************************************************ \n". $errorClass . " -> " . $timestamp . ":\n". $error;
     file_put_contents($FILENAME, $writeQueue, FILE_APPEND);
+
+    echo "<script>alert('".$writeQueue."')</script>";
 }
 
 function connectToDB() {
     try{
         $name = 'TutleZone';
-        $pass ='Passw0rd!';
+        $pass ='Passw0rd';
         $DBcon = new PDO('mysql:host=TutleZone.db.11939703.hostedresource.com;dbname=TutleZone',$name, $pass);
     }
     catch (PDOException $e){
-        echo '<script>alert("'.$e.'");</script>';
-        $error =$e->getMessage();
-        writelog('DB', $error);
+
+
+        writeLog('DB', $e);
         return false;
     }
     return $DBcon;
