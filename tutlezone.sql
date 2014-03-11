@@ -29,16 +29,15 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `credentials` (
   `CREDENTIALS_USERID` int(11) NOT NULL AUTO_INCREMENT,
   `CREDENTIALS_USERNAME` varchar(32) NOT NULL,
-  `CREDENTIALS_PASSWORD` varchar(40) DEFAULT NULL,
+  `CREDENTIALS_PASSWORD` varchar(40) NOT NULL,
   `TYPECODE_ID` int(11) NOT NULL,
   `CREDENTIALS_CREATE_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `CREDENTIALS_LAST_LOGIN` datetime NOT NULL,
-  `CREDENTIALS_FAILED_ATTEMPTS` int(11) NOT NULL,
-  `CREDENTIALS_LOCKED` tinyint(1) NOT NULL,
-  `CREDENTIALS_DISABLED` tinyint(1) NOT NULL,
+  `CREDENTIALS_LAST_LOGIN` datetime,
+  `CREDENTIALS_FAILED_ATTEMPTS` int(11) DEFAULT 0,
+  `CREDENTIALS_LOCKED` tinyint(1) DEFAULT false,
+  `CREDENTIALS_DISABLED` tinyint(1) DEFAULT false,
   PRIMARY KEY (`CREDENTIALS_USERID`),
   UNIQUE KEY `CREDENTIALS_USERNAME` (`CREDENTIALS_USERNAME`),
-  KEY `CREDENTIALS_USERID` (`CREDENTIALS_USERID`),
   KEY `TYPECODE_ID` (`TYPECODE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -67,15 +66,15 @@ CREATE TABLE IF NOT EXISTS `lesson` (
   `lesson_id` int(11) NOT NULL AUTO_INCREMENT,
   `match_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `lesson_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `lesson_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lesson_time` time NOT NULL,
   `lesson_length` int(11) NOT NULL,
   `lesson_title` varchar(32) NOT NULL,
-  `lesson_desc` varchar(256) NOT NULL,
-  `lesson_location` varchar(32) NOT NULL,
-  `statuscode_id` int(11) NOT NULL,
-  `lesson_comments` varchar(512) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
+  `lesson_desc` varchar(256),
+  `lesson_location` varchar(32),
+  `statuscode_id` int(11) DEFAULT 1,
+  `lesson_comments` varchar(512),
+  `transaction_id` int(11),
   PRIMARY KEY (`lesson_id`),
   KEY `match_id` (`match_id`),
   KEY `subject_id` (`subject_id`),
@@ -107,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `match` (
 
 CREATE TABLE IF NOT EXISTS `method` (
   `method_id` int(11) NOT NULL AUTO_INCREMENT,
-  `method_desc` varchar(256) NOT NULL,
+  `method_desc` varchar(256) NOT NULL DEFAULT 'No Description Provided',
   `method_abbr` varchar(6) NOT NULL,
   `method_active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`method_id`)
@@ -116,7 +115,8 @@ CREATE TABLE IF NOT EXISTS `method` (
 INSERT INTO `method` (`method_id`, `method_desc`, `method_abbr`, `method_active`) VALUES
 (1, 'A cash payment received from the student', 'Cash', true),
 (2, 'A cheque received from the student', 'Cheque', true),
-(3, 'A refund applied to the students account', 'Refund', true);
+(3, 'A refund applied to the students account', 'Refund', true),
+(4, 'An automatically generated transaction based on the completion of a lesson', 'Charge', true);
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
 
 CREATE TABLE IF NOT EXISTS `statuscode` (
   `statuscode_id` int(11) NOT NULL AUTO_INCREMENT,
-  `statuscode_desc` varchar(256) NOT NULL,
+  `statuscode_desc` varchar(256) NOT NULL DEFAULT 'No Description Provided',
   `statuscode_abbr` varchar(25) NOT NULL,
   `statuscode_active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`statuscode_id`)
@@ -168,12 +168,12 @@ CREATE TABLE IF NOT EXISTS `student` (
   `credentials_userid` int(11) NOT NULL,
   `student_fname` varchar(32) NOT NULL,
   `student_lname` varchar(32) NOT NULL,
-  `student_address` varchar(256) NOT NULL,
+  `student_address` varchar(256),
   `student_city` varchar(64) NOT NULL,
-  `student_postal` varchar(8) NOT NULL,
+  `student_postal` varchar(8),
   `student_email` varchar(32) NOT NULL,
-  `student_picture` blob NOT NULL,
-  `student_about` text NOT NULL,
+  `student_picture` blob,
+  `student_about` text,
   PRIMARY KEY (`credentials_userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 CREATE TABLE IF NOT EXISTS `subject` (
   `subject_id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_name` varchar(32) NOT NULL,
-  `subject_desc` varchar(256) NOT NULL,
+  `subject_desc` varchar(256),
   PRIMARY KEY (`subject_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `testimonials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(150) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `visitor_type` varchar(10) NOT NULL,
+  `visitor_type` varchar(10) DEFAULT 'Guest',
   `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -224,9 +224,9 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `match_id` int(11) NOT NULL,
   `transaction_amount` double NOT NULL,
-  `transaction_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `transaction_notes` varchar(256) NOT NULL,
-  `method_id` int(11) NOT NULL,
+  `transaction_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `transaction_notes` varchar(256),
+  `method_id` int(11) DEFAULT 4,
   PRIMARY KEY (`transaction_id`),
   KEY `match_id` (`match_id`),
   KEY `method_id` (`method_id`)
@@ -242,14 +242,14 @@ CREATE TABLE IF NOT EXISTS `tutor` (
   `credentials_userid` int(11) NOT NULL,
   `tutor_fname` varchar(32) NOT NULL,
   `tutor_lname` varchar(32) NOT NULL,
-  `tutor_address` varchar(256) NOT NULL,
+  `tutor_address` varchar(256),
   `tutor_city` varchar(64) NOT NULL,
-  `tutor_postal` varchar(8) NOT NULL,
+  `tutor_postal` varchar(8),
   `tutor_email` varchar(32) NOT NULL,
-  `tutor_picture` blob NOT NULL,
-  `tutor_company` varchar(32) NOT NULL,
-  `tutor_website` varchar(32) NOT NULL,
-  `tutor_bio` text NOT NULL,
+  `tutor_picture` blob,
+  `tutor_company` varchar(32),
+  `tutor_website` varchar(32),
+  `tutor_bio` text,
   PRIMARY KEY (`credentials_userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -261,9 +261,9 @@ CREATE TABLE IF NOT EXISTS `tutor` (
 
 CREATE TABLE IF NOT EXISTS `typecode` (
   `typecode_id` int(11) NOT NULL AUTO_INCREMENT,
-  `typecode_desc` varchar(256) NOT NULL,
+  `typecode_desc` varchar(256)DEFAULT 'No Description Provided',
   `typecode_abbr` varchar(10) NOT NULL,
-  `typecode_active` tinyint(1) NOT NULL DEFAULT '1',
+  `typecode_active` tinyint(1)  DEFAULT '1',
   PRIMARY KEY (`typecode_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
