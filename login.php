@@ -23,19 +23,19 @@
                                 <hr />
                                 <div class="form">
                                     <!-- Login form (not working)-->
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="POST" action="processLogin.php">
                                         <!-- Username -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="username">Username</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="username">
+                                                <input type="text" class="form-control" id="username" name="username">
                                             </div>
                                         </div>
                                         <!-- Password -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="email">Password</label>
                                             <div class="col-md-9">
-                                                <input type="password" class="form-control" id="password">
+                                                <input type="password" class="form-control" id="password" name="password">
                                             </div>
                                         </div>
                                         <div class="form-group">

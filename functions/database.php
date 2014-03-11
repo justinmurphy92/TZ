@@ -10,7 +10,7 @@ define("DB", "DB ERROR");
 define("UNDEFINED", "MISC ERROR");
 
 function writeLog($errorClass, $error){
-    $FILENAME = '../tzLog.txt';
+    $FILENAME = 'tzLog.txt';
     $date = new DateTime();
     $timestamp = $date->getTimestamp();
     switch($errorClass)
@@ -29,9 +29,12 @@ function writeLog($errorClass, $error){
 
 function connectToDB() {
     try{
-        $DBcon = new PDO('mysql:host=127.0.0.1;dbname=tutlffezone', 'root', '');
+        $name = 'TutleZone';
+        $pass ='Passw0rd!';
+        $DBcon = new PDO('mysql:host=TutleZone.db.11939703.hostedresource.com;dbname=TutleZone',$name, $pass);
     }
     catch (PDOException $e){
+        echo '<script>alert("'.$e.'");</script>';
         $error =$e->getMessage();
         writelog('DB', $error);
         return false;

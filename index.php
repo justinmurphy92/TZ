@@ -162,7 +162,7 @@ displayNavigation(0);
                             if ($db)
                             {
                               try{
-                                  $sql = "SELECT * FROM TESTIMONIALS ORDER BY RAND() LIMIT 3";
+                                  $sql = "SELECT * FROM testimonials ORDER BY RAND() LIMIT 3";
                                   foreach ($db->query($sql) as $row)
                                   {
                                       echo "<div class='col-md-4 col-sm-4'>";
