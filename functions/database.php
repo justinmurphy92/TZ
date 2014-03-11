@@ -5,30 +5,40 @@
  * Date: 3/10/2014
  * Time: 7:19 PM
  */
-function writeLog($errorString){
+
+define("DB", "DB ERROR");
+define("UNDEFINED", "MISC ERROR");
+
+function writeLog($errorClass, $error){
     $FILENAME = '../tzLog.txt';
-    file_put_contents(self::$FILENAME, $errorString, FILE_APPEND);
+    $date = new DateTime();
+    $timestamp = $date->getTimestamp();
+    switch($errorClass)
+    {
+        case 'DB':
+            $errorClass = DB;
+            break;
+        default:
+            $errorClass = UNDEFINED;
+            break;
+    }
+
+    $writeQueue = $errorClass . " -> " . $timestamp . ": " . $error . "\n";
+    file_put_contents($FILENAME, $writeQueue, FILE_APPEND);
 }
 
 function connectToDB() {
     try{
-        $DBcon = new PDO('mysql:host=127.0.0.1;dbname=tutlezone', 'root', '');
-
+        $DBcon = new PDO('mysql:host=127.0.0.1;dbname=tutlffezone', 'root', '');
     }
     catch (PDOException $e){
-        $date = new DateTime();
-        $writeQueue = null;
-        //made minor change.
         $error =$e->getMessage();
-
-        $timestamp = $date->getTimestamp();
-
-        $writeQueue = "DB_ERROR ->" . $timestamp . ': '. $error . '\n';
-
-        writelog($writeQueue);
+        writelog('DB', $error);
         return false;
     }
     return $DBcon;
 }
+
+
 
 

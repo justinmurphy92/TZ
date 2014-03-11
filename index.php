@@ -159,7 +159,7 @@ displayNavigation(0);
                         <div class="row">
                             <?php
                             $db = connectToDB();
-                            if (!$db)
+                            if ($db)
                             {
                               try{
                                   $sql = "SELECT * FROM TESTIMONIALS ORDER BY RAND() LIMIT 3";
@@ -170,15 +170,15 @@ displayNavigation(0);
                                       echo $row['content'];
                                       echo "</div>";
                                       echo "<div class='test-arrow'></div>";
-                                      echo "<div class='tauth'><i class='icon-user'></i>";
+                                      echo "<div class='tauth'><i class='icon-user'></i> ";
                                       echo $row['name'];
-                                      echo "<span class='color'>";
-                                      echo $row['vistor_type'];
+                                      echo " <span class='color'>";
+                                      echo $row['visitor_type'];
                                       echo "</span></div></div>";
                                   }
 
                               }catch(PDOException $e){
-                                echo $e->getMessage();
+                                writeLog('DB', $e->getMessage());
                               }
                             }
                             ?>
