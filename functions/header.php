@@ -9,7 +9,7 @@
  * Includes various CSS & JS files
  * Ensures consistency throughout the site.
  */
-
+session_start();
 function displayHeader($title = "TutleZone") {
 ?>
 

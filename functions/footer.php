@@ -8,7 +8,7 @@
  * Prints out the footer of the page, ensuring consistency throughout the site.
  */
 
-function displayFooter($userType) {
+function displayFooter() {
 ?>
     <!-- Footer -->
     <footer>
@@ -84,6 +84,33 @@ function displayFooter($userType) {
                 interval : 6000
             });
 
+        });
+
+        $(".user").mouseover(function() {
+
+            $(".user-box").show();
+
+        }).mouseout(function() {
+
+            $(".user-box").hide();
+        });
+
+        $(".schedule").mouseover(function() {
+
+            $(".schedule-box").show();
+
+        }).mouseout(function() {
+
+            $(".schedule-box").hide();
+        });
+
+        $(".notification").mouseover(function() {
+
+            $(".notification-box").show();
+
+        }).mouseout(function() {
+
+            $(".notification-box").hide();
         });
 
         $(function() {

@@ -9,8 +9,9 @@
  * Different levels currently (or will someday) have access to different functionality, this controls that.
  */
 
-function displayNavigation($userType) {
+function displayNavigation() {
 ?>
+
     <div class="navbar bs-docs-nav" role="banner">
 
         <div class="container">

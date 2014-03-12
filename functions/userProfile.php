@@ -8,7 +8,8 @@
  * The user profile section contains a sneak peek at new notifications, schedule events, and provides search functionality.
  */
 
-function displayUserArea($userID) {
+function displayUserArea() {
+    $LOGGED_IN = isset($_SESSION['USERID']);
 ?>
     <header>
         <div class="container">
@@ -23,7 +24,26 @@ function displayUserArea($userID) {
                     <div class="list">
                         <!-- User Name/Profile -->
                         <div class="user">
-                            <i class="icon-user color"></i> User Name & Logout Link
+                            <i class="icon-user color"></i>
+                            USER NAME GOES HERE
+                            <div class="user-box dropdown-box">
+                                <ul>
+                                    <?php
+                                    if ($LOGGED_IN){
+                                    ?>
+                                    <li><a href="myProfile.php"><i class="icon-gear"></i> PROFILE</a></li>
+                                    <li><a href="logout.php"><i class="icon-ban-circle"></i> LOGOUT</a></li>
+                                    <?php
+                                    } // END LOGGED IN OPTIONS
+                                    else {
+                                    ?>
+                                    <li><a href="register.php"><i class="icon-barcode"></i> REGISTER</a></li>
+                                    <li><a href="login.php"><i class="icon-signin"></i> LOGIN</a></li>
+                                    <?php
+                                    } // END GUEST OPTIONS
+                                    ?>
+                                </ul>
+                            </div>
                         </div>
                         <hr />
                         <!-- User Notifications -->
@@ -31,6 +51,11 @@ function displayUserArea($userID) {
                             <i class="icon-envelope-alt color"></i>
                             <span class="label label-danger">8</span>
                             New Notifications
+                            <div class="notification-box dropdown-box">
+                                <ul>
+                                    <li><a href="#">GOTO: Notifications Page</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <hr />
                         <!-- User Schedule -->
@@ -38,6 +63,11 @@ function displayUserArea($userID) {
                             <i class="icon-calendar color"></i>
                             <span class="label label-warning">10</span>
                             Lessons < 24 hours
+                            <div class="schedule-box dropdown-box">
+                                <ul>
+                                    <li><a href="#">GOTO: Scheduling Page </a></li>
+                                </ul>
+                            </div>
                         </div>
                         <hr />
                         <!-- User Schedule -->
