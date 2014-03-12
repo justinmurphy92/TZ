@@ -5,6 +5,18 @@
  * Date: 3/6/2014
  * Time: 6:13 PM
  */
+include('functions/footer.php');
+include('functions/header.php');
+include('functions/navbar.php');
+include('functions/userProfile.php');
+include('functions/database.php');
+
+
+displayHeader('TutleZone - Home');
+displayUserArea(0);
+displayNavigation(0);
+
+?>
 ?>
 <!-- Content strats -->
 
@@ -93,3 +105,6 @@
 </div>
 
 <!-- Content ends -->
+<?php
+displayFooter(0);
+?>
