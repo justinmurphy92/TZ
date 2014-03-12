@@ -143,6 +143,8 @@ function displayFooter() {
             });
         });
 
+
+
         $(document).ready(function() {
 
             var date = new Date();
@@ -210,7 +212,26 @@ function displayFooter() {
                 ]
             });
 
-        });
+            // ajax call for notifications
+            $.ajax({ // ajax call starts
+                url: 'ajax/notification.php',
+                dataType: 'json',
+                success: function(data) // Variable data contains the data we get from serverside
+                {
+
+                        $.each(data, function(index, element) {
+                            if (index == 0)
+                            {
+                                $('#notificationCount').append(element.notificationCount);
+                            }
+                            $('#notificationList').prepend('<li><a href="notifications.php?id=' + element.id + '"><strong style="font-size:70%;">' + element.date + '</strong> - ' + element.content + '</li>');
+                        });
+
+                    }
+
+                });
+            });
+
     </script>
     </body>
     </html>

@@ -25,7 +25,11 @@ function displayUserArea() {
                         <!-- User Name/Profile -->
                         <div class="user">
                             <i class="icon-user color"></i>
-                            USER NAME GOES HERE
+                            <?php
+                            if ($LOGGED_IN){
+                                echo $_SESSION['USERID'];
+                            }
+                            ?>
                             <div class="user-box dropdown-box">
                                 <ul>
                                     <?php
@@ -49,10 +53,10 @@ function displayUserArea() {
                         <!-- User Notifications -->
                         <div class="notification">
                             <i class="icon-envelope-alt color"></i>
-                            <span class="label label-danger">8</span>
+                            <span class="label label-danger" id="notificationCount"></span>
                             New Notifications
                             <div class="notification-box dropdown-box">
-                                <ul>
+                                <ul id="notificationList">
                                     <li><a href="#">GOTO: Notifications Page</a></li>
                                 </ul>
                             </div>
@@ -61,7 +65,7 @@ function displayUserArea() {
                         <!-- User Schedule -->
                         <div class="schedule">
                             <i class="icon-calendar color"></i>
-                            <span class="label label-warning">10</span>
+                            <span class="label label-danger">X</span>
                             Lessons < 24 hours
                             <div class="schedule-box dropdown-box">
                                 <ul>
