@@ -1,10 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:15 PM
- */
+include('functions/footer.php');
+include('functions/header.php');
+include('functions/navbar.php');
+include('functions/userProfile.php');
+include('functions/database.php');
+
+
+displayHeader('TutleZone - Home');
+displayUserArea(0);
+displayNavigation(0);
 ?>
 <!-- Content strats -->
 
@@ -23,27 +27,27 @@
                                 <hr />
                                 <div class="form">
                                     <!-- Register form (not working)-->
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="POST" action="register_redirect.php">
                                         <!-- First Name -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="name">First Name</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="name">
+                                                <input type="text" class="form-control" id="name" name="fname">
                                             </div>
                                         </div>
                                         <!-- Last Name -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="name">Last Name</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="name">
+                                                <input type="text" class="form-control" id="name" name="lname">
                                             </div>
                                         </div>
 
                                         <!-- Email -->
                                         <div class="form-group">
-                                            <label class="control-label col-md-3" for="email">Email</label>
+                                            <label class="control-label col-md-3" for="email" >Email</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="email">
+                                                <input type="text" class="form-control" id="email" name="email">
                                             </div>
                                         </div>
 
@@ -51,14 +55,14 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="username">Username</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="username">
+                                                <input type="text" class="form-control" id="username" name="username">
                                             </div>
                                         </div>
                                         <!-- Password -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="email">Pass</label>
                                             <div class="col-md-9">
-                                                <input type="password" class="form-control" id="password">
+                                                <input type="password" class="form-control" id="password" name="password">
                                             </div>
                                         </div>
                                         <!-- Verify Password -->
@@ -66,14 +70,14 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="email">Verify Pass</label>
                                             <div class="col-md-9">
-                                                <input type="password" class="form-control" id="password">
+                                                <input type="password" class="form-control" id="password" name="Vpassword">
                                             </div>
                                         </div>
                                         <!-- User Type -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="select">User Type</label>
                                             <div class="col-md-9" >
-                                                <select class="form-control" id="select">
+                                                <select class="form-control" id="select" name="type">
                                                     <option>&nbsp;</option>
                                                     <option>Student</option>
                                                     <option>Tutor</option>
@@ -84,7 +88,7 @@
                                         <div class="form-group">
                                             <div class="col-md-8 col-md-offset-3">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" id="inlineCheckbox1" value="agree"/> <a href="term.html" target="_blank">Agree with Terms and Conditions</a>
+                                                    <input type="checkbox" id="inlineCheckbox1" value="agree" name="terms"/> <a href="term.html" target="_blank">Agree with Terms and Conditions</a>
                                                 </label>
                                             </div>
                                         </div>
@@ -134,3 +138,4 @@
 </div>
 
 <!-- Content ends -->
+<?php displayFooter(0);?>

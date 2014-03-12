@@ -5,6 +5,17 @@
  * Date: 3/6/2014
  * Time: 6:15 PM
  */
+session_start();
+include('functions/footer.php');
+include('functions/header.php');
+include('functions/navbar.php');
+include('functions/userProfile.php');
+include('functions/database.php');
+
+
+displayHeader('TutleZone - Home');
+displayUserArea(0);
+displayNavigation(0);
 ?>
 <!-- Content strats -->
 
@@ -23,19 +34,19 @@
                                 <hr />
                                 <div class="form">
                                     <!-- Register form (not working)-->
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="POST" action="process_registration.php">
                                         <!-- Address-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="name">Address</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="name">
+                                                <input type="text" class="form-control" id="name" name="address">
                                             </div>
                                         </div>
                                         <!-- City -->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="name">City</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="name">
+                                                <input type="text" class="form-control" id="name" name="city">
                                             </div>
                                         </div>
 
@@ -43,7 +54,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="email">Postal Code</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" id="email">
+                                                <input type="text" class="form-control" id="email" name="postalcode">
                                             </div>
                                         </div>
 
@@ -51,7 +62,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3">About</label>
                                             <div class="col-md-9">
-                                                <textarea class="col-md-12"></textarea>
+                                                <textarea class="col-md-12" name="about"></textarea>
                                             </div>
                                         </div>
 
@@ -59,7 +70,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="email">Picutre</label>
                                             <div class="col-md-9">
-                                                <input type="file" name="pic" class="form-control" id="picture" accept="image/*">
+                                                <input type="file" name="pic" class="form-control" id="picture" accept="image/*" name="picture">
                                             </div>
                                         </div>
                                         <!-- Buttons -->
@@ -106,5 +117,5 @@
         </div>
     </div>
 </div>
-
+<?php displayFooter(0);?>
 <!-- Content ends -->
