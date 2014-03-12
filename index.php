@@ -16,7 +16,6 @@ displayHeader('TutleZone - Home');
 displayUserArea();
 displayNavigation();
 
-session_start();
 ?>
 <!-- Content strats -->
 
