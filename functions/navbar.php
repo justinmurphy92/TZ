@@ -29,6 +29,7 @@ function displayNavigation() {
                     <!-- Main menu -->
                     <li><a href="index.php"> Home </a></li>
                     <li><a href="lessons.php"> Lessons </a></li>
+                    <li><a href="notifications.php"> Notifications </a></li>
                     <!-- Navigation with sub menu. Please note down the syntax before you need. Each and every link is important. -->
 
 

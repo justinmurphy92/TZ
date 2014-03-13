@@ -58,8 +58,7 @@ function displayFooter() {
             <div class="row">
                 <hr />
                 <div class="col-md-12"><p class="copy pull-left">
-                        <!-- Copyright information. You can remove my site link. -->
-                        Copyright &copy; <a href="#">Your Site</a> | Designed by <a href="http://responsivewebinc.com">Responsive Web Design</a></p></div>
+                        Copyright &copy; <a href="http://www.redvoid.ca">redVoid Development</a> | In Partnership with C.A.I.S.S.Y</a></p></div>
             </div>
         </div>
     </footer>
@@ -83,6 +82,31 @@ function displayFooter() {
                 autoplay	: true,
                 interval : 6000
             });
+
+        });
+
+        function doIt(element){
+            var elementI = element.children[0];
+
+            if (elementI.className.contains('notifUnread')) {
+                $.post("ajax/markNotificationRead.php",{notifID:element.id},
+                    function(data) {
+                        if (data == 'worked') {
+                            elementI.className = 'icon-2x icon-check notifRead';
+                            $(element.parentNode).removeClass("unread");
+                            $(element.parentNode).addClass("read");
+                        }
+
+                    }
+                )
+
+            }
+        }
+
+        /* Isotope */
+        var $container = $('#portfolio');
+        // initialize isotope
+        $container.isotope({
 
         });
 
@@ -214,16 +238,21 @@ function displayFooter() {
 
             // ajax call for notifications
             $.ajax({ // ajax call starts
-                url: 'ajax/notification.php',
+                url: 'ajax/notificationQuickList.php',
                 dataType: 'json',
                 success: function(data) // Variable data contains the data we get from serverside
                 {
+                    $('#notificationList').html('');
+                    $('#notificationList').append('<li><a href="notifications.php">GOTO: Notifications Page</a></li>');
+
 
                         $.each(data, function(index, element) {
                             if (index == 0)
                             {
+                                $('#notificationCount').html('');
                                 $('#notificationCount').append(element.notificationCount);
                             }
+
                             $('#notificationList').prepend('<li><a href="notifications.php?id=' + element.id + '"><strong style="font-size:70%;">' + element.date + '</strong> - ' + element.content + '</li>');
                         });
 
