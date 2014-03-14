@@ -4,6 +4,7 @@
  * User: justinmurphy
  * Date: 3/10/2014
  * Time: 7:38 PM
+ * send user fname, lname and type code through session
  */
 session_start();
 
@@ -21,11 +22,11 @@ try{
     $rs = $db->query($sql);
     $row = $rs->fetch(PDO::FETCH_ASSOC);
     $_SESSION['USERID'] = $row['CREDENTIALS_USERID'];
-
+    $_SESSION['TYPECODE_ID'] = $row['TYPECODE_ID'];
 }
+
 catch (PDOException $e){
-    $error =$e->getMessage();
-    writelog('DB',$error);
+    writelog('DB',$e);
 }
 
 if($rs->columnCount() > 0){

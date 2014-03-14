@@ -5,6 +5,9 @@
  * Date: 3/11/2014
  * Time: 8:18 PM
  */
+include ('functions/database.php');
+
+$db = connectToDB();
 session_start();
 
 $fname = trim($_POST['fname']);
@@ -15,7 +18,20 @@ $password = trim($_POST['password']);
 $vPassword = trim($_POST['Vpassword']);
 $type = trim($_POST['type']);
 
-if (empty($fname) || empty($lname) || empty($email) || empty($username) || empty($password) || empty($vPassword) || empty($type) || !isset($_POST['terms']) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $password <> $vPassword){
+$sql = "SELECT * FROM credentials WHERE CREDENTIALS_USERNAME ='".$username."'";
+
+try{
+
+    $rs = $db->query($sql)->fetchAll();
+    $count = count($rs);
+
+
+}
+catch (PDOException $e){
+    writelog('DB',$e);
+}
+
+if (empty($fname) || empty($lname) || empty($email) || empty($username) || empty($password) || empty($vPassword) || empty($type) || !isset($_POST['terms']) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $password <> $vPassword || $count > 0 ){
     header('Location: register.php');
 }
 else{

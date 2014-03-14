@@ -8,6 +8,7 @@
 
 define("DB", "DB ERROR");
 define("UNDEFINED", "MISC ERROR");
+define("IMG", "IMAGE UPLOAD ERROR");
 
 function writeLog($errorClass, $e){
     $FILENAME = 'tzLog.txt';
@@ -17,6 +18,8 @@ function writeLog($errorClass, $e){
         case 'DB':
             $errorClass = DB;
             break;
+        case 'IMG':
+            $errorClass = IMG;
         default:
             $errorClass = UNDEFINED;
             break;

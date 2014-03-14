@@ -34,7 +34,7 @@ displayNavigation(0);
                                 <hr />
                                 <div class="form">
                                     <!-- Register form (not working)-->
-                                    <form class="form-horizontal" method="POST" action="process_registration.php">
+                                    <form class="form-horizontal" method="POST" action="process_registration.php" enctype="multipart/form-data">
                                         <!-- Address-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3" for="name">Address</label>
@@ -68,9 +68,9 @@ displayNavigation(0);
 
                                         <!-- Picture -->
                                         <div class="form-group">
-                                            <label class="control-label col-md-3" for="email">Picutre</label>
+                                            <label class="control-label col-md-3" for="file">Picutre</label>
                                             <div class="col-md-9">
-                                                <input type="file" name="pic" class="form-control" id="picture" accept="image/*" name="picture">
+                                                <input type="file" name="pic" class="form-control" id="pic">
                                             </div>
                                         </div>
                                         <!-- Buttons -->
