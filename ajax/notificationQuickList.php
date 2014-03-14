@@ -6,7 +6,6 @@
  * Time: 6:06 PM
  */
 session_start();
-$_SESSION['USERID'] = 1;
 include('../functions/database.php');
 header('Content-type: application/json'); // we'll be returning JSON to be interpreted from inline javascript
 if (isset($_SESSION['USERID'])){
