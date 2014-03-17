@@ -7,6 +7,7 @@
  * send user fname, lname and type code through session
  */
 session_start();
+$userType = '';
 
 include('functions/database.php');
 $db = connectToDB();
@@ -36,13 +37,15 @@ elseif ($row['TYPECODE_ID'] == '2' || $row['TYPECODE_ID'] == 2){
     $userType = 'tutor';
 }
 
-$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = '".$row['credentials_userid']."'";
+
+$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = ".$_SESSION['USERID'];
 
 try{
     $rs = $db->query($sql);
     $row = $rs->fetch(PDO::FETCH_ASSOC);
-    $_SESSION['fname'] = $row[$userType.'_fname'];
-    $_SESSION['lanme'] = $row[$userType.'_lname'];
+    $_SESSION['FNAME'] = $row[$userType.'_fname'];
+    $_SESSION['LNAME'] = $row[$userType.'_lname'];
+
 }
 catch (PDOException $e){
     writelog('DB',$e);

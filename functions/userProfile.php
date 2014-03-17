@@ -27,7 +27,10 @@ function displayUserArea() {
                             <i class="icon-user color"></i>
                             <?php
                             if ($LOGGED_IN){
-                                echo $_SESSION['USERID'];
+                                echo $_SESSION['LNAME'] . ", " . $_SESSION['FNAME'];
+                            }
+                            else{
+                                echo "Guest";
                             }
                             ?>
                             <div class="user-box dropdown-box">
