@@ -87,6 +87,10 @@ if($type == "Student"){
         //run query
         try{
             if($query->execute()){
+                $_SESSION['USERID'] = $userid;
+                $_SESSION['TYPECODE_ID'] = $type;
+                $_SESSION['fname'] = $fname;
+                $_SESSION['lname'] = $lname;
                 header('Location: index.php');
             }
         }
@@ -170,7 +174,12 @@ elseif ($type == 'Tutor'){
 
         try{
              if($query->execute()){
-             header('Location: index.php');
+                $_SESSION['USERID'] = $userid;
+                $_SESSION['TYPECODE_ID'] = $type;
+                $_SESSION['fname'] = $fname;
+                $_SESSION['lname'] = $lname;
+
+                header('Location: index.php');
              }
             else{
                 echo "SOMETHING IS HORRIBLY WRONG! CALL FOR HELP";

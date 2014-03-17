@@ -17,6 +17,7 @@ displayHeader('TutleZone - Home');
 displayUserArea(0);
 displayNavigation(0);
 $db = connectToDB();
+$userType;
 
 if ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1){
     $userType = 'student';
@@ -25,14 +26,13 @@ elseif($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2){
     $userType = 'tutor';
 }
 
-//$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = '".$_SESSION['USERID']."'";
-$sql = "SELECT * FROM tutor WHERE credentials_userid = 18";
+$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = ".$_SESSION['USERID'];
+//$sql = "SELECT * FROM tutor WHERE credentials_userid = 18";
 
-
+echo $sql;
 try{
     $rs = $db->query($sql);
     $row = $rs->fetch(PDO::FETCH_ASSOC);
-    $userType = 'tutor';
 }
 catch (PDOException $e) {
     writeLog('DB', $e);
@@ -116,7 +116,7 @@ catch (PDOException $e) {
                         echo "</table>";
                         $_SESSION['row'] = $row;
                         ?>
-                        <button type="submit" class="btn btn-default">Save</button>
+                        <input type="submit" class="btn btn-default">Save</button>
                     </form>
                 </div>
                 <div class="cta">
