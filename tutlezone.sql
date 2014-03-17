@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `lesson` (
 -- Table structure for table `match`
 --
 
-CREATE TABLE IF NOT EXISTS `match` (
+CREATE TABLE IF NOT EXISTS `matches` (
   `match_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_userid` int(11) NOT NULL,
   `tutor_userid` int(11) NOT NULL,
@@ -293,14 +293,14 @@ ALTER TABLE `expertise`
 --
 ALTER TABLE `lesson`
   ADD CONSTRAINT `lesson_ibfk_4` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`),
-  ADD CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`),
+  ADD CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`),
   ADD CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`),
   ADD CONSTRAINT `lesson_ibfk_3` FOREIGN KEY (`statuscode_id`) REFERENCES `statuscode` (`statuscode_id`);
 
 --
 -- Constraints for table `match`
 --
-ALTER TABLE `match`
+ALTER TABLE `matches`
   ADD CONSTRAINT `match_ibfk_2` FOREIGN KEY (`tutor_userid`) REFERENCES `tutor` (`credentials_userid`),
   ADD CONSTRAINT `match_ibfk_1` FOREIGN KEY (`student_userid`) REFERENCES `student` (`credentials_userid`);
 
@@ -321,7 +321,7 @@ ALTER TABLE `student`
 --
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`method_id`) REFERENCES `method` (`method_id`),
-  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`);
+  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`);
 
 --
 -- Constraints for table `tutor`
