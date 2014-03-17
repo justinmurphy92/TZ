@@ -17,7 +17,7 @@ displayUserArea(0);
 displayNavigation(0);
 
 ?>
-?>
+
 <!-- Content strats -->
 
 <div class="content">

@@ -29,6 +29,25 @@ catch (PDOException $e){
     writelog('DB',$e);
 }
 
+if($row['TYPECODE_ID'] == '1' || $row['TYPECODE_ID'] == 1){
+    $userType = 'student';
+}
+elseif ($row['TYPECODE_ID'] == '2' || $row['TYPECODE_ID'] == 2){
+    $userType = 'tutor';
+}
+
+$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = '".$row['credentials_userid']."'";
+
+try{
+    $rs = $db->query($sql);
+    $row = $rs->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['fname'] = $row[$userType.'_fname'];
+    $_SESSION['lanme'] = $row[$userType.'_lname'];
+}
+catch (PDOException $e){
+    writelog('DB',$e);
+}
+
 if($rs->columnCount() > 0){
     header('Location: index.php');
     exit;
