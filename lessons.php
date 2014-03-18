@@ -15,6 +15,60 @@ displayUserArea();
 displayNavigation();
 ?>
 <!-- Content strats -->
+<div id="dialog-form" class="form" title="Create new user">
+    <p id="dialogPurpose"> Update a Lesson! </p>
+    <input type="hidden" name="lessonID" value="">
+    <form class="form-horizontal" method="POST" action="AHahahahaha">
+
+        <!-- title -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="title">Title</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+        </div>
+
+        <!-- date -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="date">Date</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="date" name="date">
+            </div>
+        </div>
+
+        <!-- length -->
+        <div class="form-group">
+            <label class="control-label col-md-4" for="length">Length: </label>
+            <div class="col-md-8">
+                <input type="number" class="form-control" id="length" name="length">
+            </div>
+        </div>
+
+        <!-- location -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="location">Location</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="location" name="location">
+            </div>
+        </div>
+
+        <!-- comments -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="comments">Comments</label>
+            <div class="col-md-9">
+                <textarea class="form-control" name="comments" id="comments"></textarea>
+            </div>
+        </div>
+
+        <!-- desc -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="desc">Description</label>
+            <div class="col-md-9">
+                <textarea class="form-control" name="desc" id="desc"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
 
 <div class="content">
     <div class="container">
