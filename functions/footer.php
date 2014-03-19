@@ -173,7 +173,7 @@ function displayFooter() {
         $(document).ready(function() {
 
             $(function() {
-                $('#date').datetimepicker();
+                $('#date').datetimepicker({stepMinute: 15});
             });
 
             $('#calendar').fullCalendar({
@@ -186,9 +186,17 @@ function displayFooter() {
                 editable:false,
                 events: 'ajax/scheduleCalendar.php',
                 eventClick: function(calEvent, jsEvent, view) {
+                    $( "#lessonID").val(calEvent.id);
+                    $( "#matchID").val(calEvent.matchID);
+                    $( "#title").val(calEvent.title);
+                    $( "#date").val(calEvent.start);
+                    $('#date').datetimepicker('setDate', new Date(calEvent.unixTime*1000));
+                    $( "#length").val(calEvent.lessonLength);
+                    $( "#location").val(calEvent.lessonLocation);
+                    $( "#comments").val(calEvent.lessonComments);
+                    $( "#desc").val(calEvent.lessonDesc);
                     $( "#dialog-form" ).dialog( "open" );
                     // change the border color just for fun
-                    $(this).css('border-color', 'red');
                 }
             });
 
@@ -201,8 +209,24 @@ function displayFooter() {
                 width: 450,
                 modal: true,
                 buttons: {
-                    "Create an account": function() {
-                        ALERT('HI');
+                    "Update Lesson": function() {
+                        $.post("ajax/updateLesson.php",$( "#updateForm" ).serialize(),
+                            function(data) {
+                                if (data == 'success') {
+                                    $( this ).dialog( "close" );
+                                }
+                                else if(data == 'unauthorized') {
+                                    $( this ).dialog( "close" );
+                                }
+                                else{
+                                    $( this ).dialog( "close" );
+                                }
+
+                            }
+                        )
+                            .fail( function(xhr, textStatus, errorThrown) {
+                                alert(xhr.responseText);
+                            });
                     },
                     Cancel: function() {
                         $( this ).dialog( "close" );

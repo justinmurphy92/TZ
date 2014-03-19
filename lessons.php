@@ -17,8 +17,12 @@ displayNavigation();
 <!-- Content strats -->
 <div id="dialog-form" class="form" title="Create new user">
     <p id="dialogPurpose"> Update a Lesson! </p>
-    <input type="hidden" name="lessonID" value="">
-    <form class="form-horizontal" method="POST" action="AHahahahaha">
+
+    <form id="updateForm" class="form-horizontal" method="POST" action="AHahahahaha">
+
+        <input type="hidden" name="lessonID" id="lessonID" value="">
+
+        <input type="hidden" name="matchID" id="matchID" value="">
 
         <!-- title -->
         <div class="form-group">
