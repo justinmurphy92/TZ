@@ -24,7 +24,7 @@ if (isset($_SESSION['USERID']) && isset($_POST['notifID'])){
             }
         }
         catch(Exception $e){
-            echo $e->getMessage();
+            echo "Nuh uh";
         }
     }
 }

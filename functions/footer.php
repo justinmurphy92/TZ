@@ -173,7 +173,11 @@ function displayFooter() {
         $(document).ready(function() {
 
             $(function() {
-                $('#date').datetimepicker({stepMinute: 15});
+                $('#date').datetimepicker({
+                    stepMinute: 15,
+                    dateFormat: 'yy-mm-dd'
+
+                });
             });
 
             $('#calendar').fullCalendar({
@@ -190,7 +194,7 @@ function displayFooter() {
                     $( "#matchID").val(calEvent.matchID);
                     $( "#title").val(calEvent.title);
                     $( "#date").val(calEvent.start);
-                    $('#date').datetimepicker('setDate', new Date(calEvent.unixTime*1000));
+                    $('#date').datetimepicker('setDate', calEvent.start);
                     $( "#length").val(calEvent.lessonLength);
                     $( "#location").val(calEvent.lessonLocation);
                     $( "#comments").val(calEvent.lessonComments);
@@ -209,25 +213,37 @@ function displayFooter() {
                 width: 450,
                 modal: true,
                 buttons: {
+                    <?php
+                    // only tutors should have an update lesson button.
+                    if ($_SESSION['TYPECODE_ID'] == 2) {
+                    ?>
+
                     "Update Lesson": function() {
                         $.post("ajax/updateLesson.php",$( "#updateForm" ).serialize(),
                             function(data) {
                                 if (data == 'success') {
-                                    $( this ).dialog( "close" );
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Successfully Updated!");
+                                    $('#calendar').fullCalendar('refetchEvents');
                                 }
                                 else if(data == 'unauthorized') {
-                                    $( this ).dialog( "close" );
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Unauthorized Access Detected.. tisk tisk..");
+                                }
+                                else if(data == 'missing') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Not all required data was entered.. Try again.");
                                 }
                                 else{
-                                    $( this ).dialog( "close" );
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("An Unknown Error Occured!");
                                 }
-
                             }
                         )
                             .fail( function(xhr, textStatus, errorThrown) {
-                                alert(xhr.responseText);
-                            });
-                    },
+                                alert("An Unknown Error Occured!");
+                            })
+                    },<?php } // CLOSE TUTOR SELECT ?>
                     Cancel: function() {
                         $( this ).dialog( "close" );
                     }
