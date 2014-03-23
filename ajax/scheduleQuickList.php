@@ -27,7 +27,7 @@ if (isset($_SESSION['USERID'])){
         try{
             // get the count first
             // we'll have to loop through each of the matches associated with the user
-            $sql = "SELECT * FROM lesson WHERE match_id = :matchID AND (lesson_date BETWEEN " . $startTime . " AND " . $endTime . ") ORDER BY lesson_date asc";
+            $sql = "SELECT * FROM lesson WHERE match_id = :matchID AND (lesson_date BETWEEN " . $startTime . " AND " . $endTime . ") ORDER BY lesson_date desc";
             $query = $db->prepare($sql);
 
             foreach($_SESSION['matches'] as $thisMatch){
@@ -42,7 +42,7 @@ if (isset($_SESSION['USERID'])){
                                 'title'=>$row['lesson_title'],
                                 'location'=>$row['lesson_location'],
                                 'date'=>$formattedDate,
-                                'with'=>$thisMatch['fname'] . ' ' . $thisMatch['lname']);
+                                'party'=>$thisMatch['fname'] . ' ' . $thisMatch['lname']);
                     }
                 }
 

@@ -320,6 +320,27 @@ function displayFooter() {
                     }
 
                 });
+
+
+            // ajax call for schedule events
+            $.ajax({ // ajax call starts
+                url: 'ajax/scheduleQuickList.php',
+                dataType: 'json',
+                success: function(data) // Variable data contains the data we get from serverside
+                {
+                    $('#scheduleList').html('');
+                    $('#scheduleList').append('<li><a href="lessons.php">GOTO: Lessons Page</a></li>');
+
+
+                    $.each(data, function(index, element) {
+                        $('#scheduleCount').html('');
+                        $('#scheduleCount').append(index + 1);
+                        $('#scheduleList').prepend('<li><a href="lessons.php?id=' + element.id + '"><strong style="font-size:70%;">' + element.date + '</strong><br/>With: ' + element.party + '</li>');
+                    });
+
+                }
+
+            });
             });
 
     </script>
