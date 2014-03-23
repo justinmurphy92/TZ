@@ -31,6 +31,7 @@ function writeLog($errorClass, $e){
     echo "<script>alert('".$writeQueue."')</script>";
 }
 
+// used to connect to the DB And return the connection string
 function connectToDB() {
     try{
         $name = 'TutleZone';
@@ -44,6 +45,27 @@ function connectToDB() {
         return false;
     }
     return $DBcon;
+}
+
+// used to insert standard notifications into the database.
+// currently used, for instance, when a new lesson is added or a lesson is modified.
+function insertNotification($userID, $content){
+    $db = connectToDB();
+    if ($db)
+    {
+        try{
+            //try the update
+            $sql = "INSERT INTO notification(credentials_userid, notification_content) VALUES(:userID, :content)";
+            $query = $db->prepare($sql);
+            $query->bindValue(':userID', $userID);
+            $query->bindValue(':content', $content);
+            $query->execute();
+        }
+        catch(Exception $e){
+            writeLog("DB", $e);
+        }
+    }
+
 }
 
 

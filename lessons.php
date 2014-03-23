@@ -10,12 +10,17 @@ include('functions/footer.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
+include('functions/codeTables.php');
 
 displayHeader('TutleZone - Lessons');
 displayUserArea();
 displayNavigation();
 ?>
-<!-- Content strats -->
+<!-- Content starts -->
+
+<!-- This is the dialog box for updating lessons (when the user clicks on an event in the calendar).
+It is hidden by  default -->
+
 <div id="dialog-form" class="form" title="Update a Lesson">
     <p id="dialogPurpose"> Update a Lesson! </p>
 
@@ -41,10 +46,26 @@ displayNavigation();
             </div>
         </div>
 
+        <!-- subjets -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="subjects">Subject</label>
+            <div class="col-md-9">
+                <select name="subjectID" class="form-control" id="subjectID">
+                    <?php
+                    if (loadSubjects()){
+                        foreach($_SESSION['subjects'] as $thisSubject){
+                            echo "<option value='" . $thisSubject['id'] . "'>" . $thisSubject['name'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
         <!-- length -->
         <div class="form-group">
-            <label class="control-label col-md-4" for="length">Length: </label>
-            <div class="col-md-8">
+            <label class="control-label col-md-3" for="length">Length: </label>
+            <div class="col-md-9">
                 <input type="number" class="form-control" id="length" name="length">
             </div>
         </div>
@@ -75,100 +96,26 @@ displayNavigation();
     </form>
 </div>
 
-<div class="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-9">
-                <div id='calendar'></div>
-            </div>
-            <div style=" margin-top:15px;" class="col-xs-6 col-md-3">
-                <div class="main-box">
-                    <h4>Your Match Legend</h4>
-                    <p>Your schedule events (to the left) are colour coded based on your active matches </p>
-                    <ul>
-                        <?php
-                        if (isset($_SESSION['USERID'])){
-                            $db = connectToDB();
-                            if ($db)
-                            {
-                                try{
-                                    //perform query to get match list based on user access
-                                    $matchSQL = "";
-                                    if ($_SESSION['TYPECODE_ID'] == 1) {
-                                        //student
-                                        $matchSQL = "select match_id, match_colour, tutor_fname as 'fname', tutor_lname as 'lname' from matches JOIN tutor on tutor_userid = credentials_userid where student_userid =:userid";
-                                    }
-                                    elseif($_SESSION['TYPECODE_ID'] == 2) {
-                                        // tutor
-                                        $matchSQL = "select match_id, match_colour, student_fname as 'fname', student_lname as 'lname' from matches JOIN student on student_userid = credentials_userid where tutor_userid =:userid";
-                                    }
-
-                                    // if the sql isn't empty by now (not a tutor or student)
-                                    if ($matchSQL != "")
-                                    {
-                                        $matchQuery = $db->prepare($matchSQL);
-                                        $matchQuery->bindValue(':userid', $_SESSION['USERID']);
-
-                                        // loop through result set, write an li for each found.
-                                        if ($matchQuery->execute() && $matchQuery->rowCount() > 0){
-                                            while ($row = $matchQuery->fetch(PDO::FETCH_ASSOC)) {
-                                                // clear any saved matches
-                                                unset($_SESSION['matches']);
-
-                                                // store the matches in the session, as we'll need them again.
-                                                $_SESSION['matches'][] = array('match_id' => $row['match_id'],
-                                                                               'match_colour' => $row['match_colour'],
-                                                                               'fname' => $row['fname'],
-                                                                               'lname' => $row['lname']);
-                                                echo "<li style='color:" . $row['match_colour'] . "'>" . $row['fname'] . " " . $row['lname'] . "</li>";
-                                            }
-                                        }
-                                        else{
-                                            echo "<li> No Matches :( </li>";
-                                        }
-                                    }
-
-                                }
-                                catch(Exception $e){
-                                    echo "<li> Matches could not be loaded :( </li>";
-                                }
-                            }
-                        }
-                        ?>
-                    </ul>
-                </div>
-            </div>
-            <div style="margin-top:15px;" class="col-xs-6 col-md-3">
-                <div class="main-box">
-                    <h4>Lesson Options </h4>
-                    <ul>
-                        <li class="button"> Create/Schedule A New Lesson <br/> <a href="#" style="width:100%"> Create Lesson </a></li>
-                        <li class="button"> Not Feeling Well? Take a Sick Day.  We'll cancel all your lessons for the day & notify the other party. <br/> <a href="#" style="width:100%"> I'm Sick! </a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- This is the dialog box for CREATING lessons (when the user clicks on the create lesson link along the right).
+It is hidden by  default.  Only tutors can create new lessons. -->
 <?php
 // we only want to allow tutors logged in & with available matches to create lessons.
-if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPECODE_ID'] == 2) {
-?>
+if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPECODE_ID'] == 2 && loadSubjects()) {
+    ?>
 
-<div id="dialog-form2" class="form" title="Update a Lesson">
+    <div id="dialog-form2" class="form" title="Update a Lesson">
         <p id="dialogPurpose"> Create a Lesson! </p>
 
         <form id="createForm" class="form-horizontal" method="POST" action="#">
 
             <!-- matches -->
             <div class="form-group">
-                <label class="control-label col-md-3" for="matches">With whom?</label>
+                <label class="control-label col-md-3" for="matches">With?</label>
                 <div class="col-md-9">
-                    <select name="matchID" class="form-control" id="matchID">
+                    <select name="lessonMatchID" class="form-control" id="lessonMatchID">
                         <?php
                         foreach($_SESSION['matches'] as $thisMatch){
-                            echo "<option value='" . $thisMatch['matchID'] . "'>" . $thisMatch['fname'] . " " . $thisMatch['lname'] . "</option>";
+                            echo "<option value='" . $thisMatch['match_id'] . "'>" . $thisMatch['fname'] . " " . $thisMatch['lname'] . "</option>";
                         }
                         ?>
                     </select>
@@ -191,10 +138,26 @@ if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPE
                 </div>
             </div>
 
+            <!-- subjects -->
+            <div class="form-group">
+                <label class="control-label col-md-3" for="subjects">Subject</label>
+                <div class="col-md-9">
+                    <select name="lessonSubjectID" class="form-control" id="lessonSubjectID">
+                        <?php
+                        if (loadSubjects()){
+                            foreach($_SESSION['subjects'] as $thisSubject){
+                                echo "<option value='" . $thisSubject['id'] . "'>" . $thisSubject['name'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
             <!-- length -->
             <div class="form-group">
-                <label class="control-label col-md-4" for="length">Length: </label>
-                <div class="col-md-8">
+                <label class="control-label col-md-3" for="length">Length: </label>
+                <div class="col-md-9">
                     <input type="number" class="form-control" id="lessonLength" name="lessonLength">
                 </div>
             </div>
@@ -225,9 +188,50 @@ if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPE
         </form>
     </div>
 
-    <?php
-        } // end lesson create
-    ?>
+<?php
+} // end lesson create
+?>
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9">
+                <div id='calendar'></div>
+            </div>
+            <div style=" margin-top:15px;" class="col-xs-6 col-md-3">
+                <div class="main-box">
+                    <h4>Your Match Legend</h4>
+                    <p>Your schedule events (to the left) are colour coded based on your active matches </p>
+                    <ul>
+                        <?php
+                         if (loadMatches()){
+                                 foreach($_SESSION['matches'] as $thisMatch){
+                                     echo "<li style='color:" . $thisMatch['match_colour'] . "'>" . $thisMatch['fname'] . " " . $thisMatch['lname'] . "</li>";
+                                 }
+                             } else {
+                             echo "<li> No Matches :( </li>";
+                         }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top:15px;" class="col-xs-6 col-md-3">
+                <div class="main-box">
+                    <h4>Lesson Options </h4>
+                    <ul>
+                        <?php // only tutors can create lessons
+                        if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 2) { ?>
+                        <li class="button"> Create/Schedule A New Lesson <br/> <a id="newLessonLink" style="width:100%"> Create Lesson </a></li>
+                        <?php } ?>
+                        <li class="button"> Not Feeling Well? Take a Sick Day.  We'll cancel all your lessons for the day & notify the other parties. <br/> <a href="#" style="width:100%"> I'm Sick! </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Content ends -->
 
 <?php

@@ -180,6 +180,14 @@ function displayFooter() {
                 });
             });
 
+            $(function() {
+                $('#lessonDate').datetimepicker({
+                    stepMinute: 15,
+                    dateFormat: 'yy-mm-dd'
+
+                });
+            });
+
             $('#calendar').fullCalendar({
                 theme: true,
                 header: {
@@ -190,23 +198,24 @@ function displayFooter() {
                 editable:false,
                 events: 'ajax/scheduleCalendar.php',
                 eventClick: function(calEvent, jsEvent, view) {
+                    $('#updateForm').trigger("reset");
                     $( "#lessonID").val(calEvent.id);
                     $( "#matchID").val(calEvent.matchID);
                     $( "#title").val(calEvent.title);
                     $( "#date").val(calEvent.start);
+                    $('[name=subjectID]').val(calEvent.subject);
                     $('#date').datetimepicker('setDate', calEvent.start);
                     $( "#length").val(calEvent.lessonLength);
                     $( "#location").val(calEvent.lessonLocation);
                     $( "#comments").val(calEvent.lessonComments);
                     $( "#desc").val(calEvent.lessonDesc);
                     $( "#dialog-form" ).dialog( "open" );
-                    // change the border color just for fun
                 }
             });
 
 
 
-            // CALENDAR DROP DOWN
+            // Dialogue box for updating a lesson.
             $( "#dialog-form" ).dialog({
                 autoOpen: false,
                 height:600,
@@ -215,10 +224,11 @@ function displayFooter() {
                 buttons: {
                     <?php
                     // only tutors should have an update lesson button.
-                    if ($_SESSION['TYPECODE_ID'] == 2) {
+                    if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 2) {
                     ?>
 
                     "Update Lesson": function() {
+                        //alert($( "#updateForm" ).serialize());
                         $.post("ajax/updateLesson.php",$( "#updateForm" ).serialize(),
                             function(data) {
                                 if (data == 'success') {
@@ -252,6 +262,63 @@ function displayFooter() {
 
                 }
             });
+
+            <?php
+            // only tutors can add new lessons.
+            if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 2) {
+                ?>
+
+            // dialogue form for creating new lessons
+            $( "#dialog-form2" ).dialog({
+                autoOpen: false,
+                height:600,
+                width: 500,
+                modal: true,
+                buttons: {
+                    "Create Lesson": function() {
+                        //alert($( "#createForm" ).serialize());
+                       $.post("ajax/createLesson.php",$( "#createForm" ).serialize(),
+                            function(data) {
+                                if (data == 'success') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Successfully Created!");
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                }
+                                else if(data == 'unauthorized') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Unauthorized Access Detected.. tisk tisk..");
+                                }
+                                else if(data == 'missing') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Not all required data was entered.. Try again.");
+                                }
+                                else{
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("An Unknown Error Occured!");
+                                }
+                            }
+                        )
+                            .fail( function(xhr, textStatus, errorThrown) {
+                               // this is a failsafe for any network issues as the above will not capture it.
+                                alert("An Unknown Error Occured!");
+                            })
+                    },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+
+                }
+            });
+
+            $("#newLessonLink").click(function(){
+                $('#createForm').trigger("reset");
+                $( "#dialog-form2" ).dialog( "open" );
+            });
+                <?php
+                    } // end create lesson form
+                ?>
 
             // ajax call for notifications
             $.ajax({ // ajax call starts

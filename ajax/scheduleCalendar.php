@@ -47,6 +47,7 @@ if (isset($_SESSION['USERID'])){
                             $endTime = $lessonRow['lesson_date'] + ($lessonRow['lesson_length'] * 60);
                             $jsondata[] = array('id'=>$lessonRow['lesson_id'],
                                                 'title'=>$lessonRow['lesson_title'],
+                                                'subject'=>$lessonRow['subject_id'],
                                                 'allDay'=> false,
                                                 'color'=>$row['match_colour'],
                                                 'start'=>$lessonRow['lesson_date'] + $date->getOffset(),
