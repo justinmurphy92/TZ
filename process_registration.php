@@ -33,7 +33,7 @@ elseif(isset($_POST['bio'])){
 
 if($type == "Student"){
     //input validation
-    if(empty($address) || empty($city) || empty($postalcode) || empty($about) || $_FILES["pic"]["error"] > 0){
+    if(empty($address) || empty($city) || empty($postalcode) || empty($about)){
         header('Location: register_student.php');
     }
     else{
@@ -64,13 +64,15 @@ if($type == "Student"){
 
         //prepare image for upload
         if ( ($_FILES["pic"]["size"] < 20000)){
-            $picture = (string)base64_encode($_FILES["pic"]["name"]);
-            $picture;
-
+            try{
+                $picture = (string)base64_encode($_FILES["pic"]["name"]);
+                $picture;
+            }
+            catch(Exception $e){
+                writeLog('IMG', $e);
+            }
         }
-        else{
-            writelog('IMG', $_FILES['pic']['error']);
-       }
+
 
         //prepare query
         $sql = "INSERT INTO student (credentials_userid, student_fname, student_lname, student_address, student_city, student_postal, student_email, student_picture, student_about) VALUES (:userid, :fname, :lname, :address, :city, :postal, :email, :picture, :about)";
@@ -88,7 +90,7 @@ if($type == "Student"){
         try{
             if($query->execute()){
                 $_SESSION['USERID'] = $userid;
-                $_SESSION['TYPECODE_ID'] = $type;
+                $_SESSION['TYPECODE_ID'] = 1;
                 $_SESSION['fname'] = $fname;
                 $_SESSION['lname'] = $lname;
                 header('Location: index.php');
@@ -101,7 +103,7 @@ if($type == "Student"){
     }
 }
 elseif ($type == 'Tutor'){
-    if(empty($address) || empty($city) || empty($postalcode) || empty($bio) ||$_FILES["pic"]["error"] > 0 || empty($subject)){
+    if(empty($address) || empty($city) || empty($postalcode) || empty($bio) || empty($subject)){
         //header('Location: register_tutor.php');
     }
     else{
@@ -175,7 +177,7 @@ elseif ($type == 'Tutor'){
         try{
              if($query->execute()){
                 $_SESSION['USERID'] = $userid;
-                $_SESSION['TYPECODE_ID'] = $type;
+                $_SESSION['TYPECODE_ID'] = 2;
                 $_SESSION['fname'] = $fname;
                 $_SESSION['lname'] = $lname;
 
