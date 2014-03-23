@@ -198,7 +198,7 @@ function displayFooter() {
                 editable:false,
                 events: 'ajax/scheduleCalendar.php',
                 eventClick: function(calEvent, jsEvent, view) {
-                    $('#updateForm').trigger("reset");
+                    $( "#updateForm").trigger("reset");
                     $( "#lessonID").val(calEvent.id);
                     $( "#matchID").val(calEvent.matchID);
                     $( "#title").val(calEvent.title);
@@ -313,7 +313,7 @@ function displayFooter() {
             });
 
             $("#newLessonLink").click(function(){
-                $('#createForm').trigger("reset");
+                $("#createForm").trigger("reset");
                 $( "#dialog-form2" ).dialog( "open" );
             });
                 <?php
