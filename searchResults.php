@@ -38,80 +38,27 @@ displayNavigation(0);
                             <div class="accordion" id="accordion2">
                                 <!-- Each item should be enclosed inside the class "accordion-group". Note down the below markup. -->
                                 <?php
+                                        $counter = 1;
+                                        foreach($_SESSION['results'] as $results){
+
+                                            echo "
+                                                <div class='accordion-group'>
+                                                    <div class='accordion-heading'>
+                                                        <a href='viewProfile.php?userid=".$results['id']."&type=".$results['type']."'>
+                                                            <h5>".$results['fname']." ". $results['lname']."</h5>
+                                                        </a>
+                                                    </div>
+                                                    <div id='collapse".$counter."' class='accordion-body collapse in''>
+                                                        <div class='accordion-inner'>
+                                                            <p>".$results['about']."</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ";
+                                            $counter++;
+                                        }
 
                                 ?>
-
-                                <!-- First Accordion -->
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                            <!-- Title. Don't forget the <i> tag. -->
-                                            <h5><i class="icon-plus"></i> Proin porttitor eros a ante molestie gravida ?</h5>
-                                        </a>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-body collapse in">
-                                        <div class="accordion-inner">
-                                            <!-- Para -->
-                                            <p>Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Second Accordion -->
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                            <h5><i class="icon-plus"></i> Proin porttitor eorbi dictum nibh gravida ?</h5>
-                                        </a>
-                                    </div>
-                                    <div id="collapseTwo" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <p>Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Thrid accordion -->
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                            <h5><i class="icon-plus"></i> In vitae adipiscing adipiscing enim gravida ?</h5>
-                                        </a>
-                                    </div>
-                                    <div id="collapseThree" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <p>Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Fourth accordion -->
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                            <h5><i class="icon-plus"></i> Sed a interdum mauris molestie gravida ?</h5>
-                                        </a>
-                                    </div>
-                                    <div id="collapseFour" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <p>Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Fifth accordion -->
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                                            <h5><i class="icon-plus"></i> Nullam in urna est urna molestie gravida ?</h5>
-                                        </a>
-                                    </div>
-                                    <div id="collapseFive" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <p>Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. </p>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
 

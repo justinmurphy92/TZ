@@ -22,7 +22,7 @@ $resultArray = array();
             if($query->execute()){
                 while($row =  $query->fetch(PDO::FETCH_ASSOC)){
                     $resultArray[]= array('id'=> $row['credentials_userid'],
-                                          'value'=> $row['credentials_userid'],
+                                          'value'=> $row['student_fname']." ".$row['student_lname'],
                                           'label'=>  $row['student_fname']." ".$row['student_lname']);
                 }
             }

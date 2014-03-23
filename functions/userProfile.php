@@ -79,11 +79,11 @@ function displayUserArea() {
                         <hr />
                         <!-- User Schedule -->
                         <div class="search">
-                            <form role="search">
+                            <form role="search" method="POST" action="functions/search.php">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search" name="srch-term" id="search">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit" style="background-color: lavender;"><i style="margin:auto;" class="icon-search color"></i></button>
+                                <button class="btn btn-default" type="submit" style="background-color: lavender;" name="submit"><i style="margin:auto;" class="icon-search color"></i></button>
                             </span>
                                 </div>
                             </form>
