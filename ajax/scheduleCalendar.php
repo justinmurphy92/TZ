@@ -7,6 +7,7 @@
  */
 session_start();
 include('../functions/database.php');
+date_default_timezone_set('America/Halifax');
 header('Content-type: application/json'); // we'll be returning JSON to be interpreted from inline javascript
 if (isset($_SESSION['USERID'])){
     $db = connectToDB();
@@ -32,6 +33,8 @@ if (isset($_SESSION['USERID'])){
 
             if ($matchQuery->execute()){
                 $jsondata = array();
+                $date = new DateTime();
+                $date->setTimeZone(new DateTimeZone('US/Eastern'));
                 // for each match, get all the lessons.
                 while ($row = $matchQuery->fetch(PDO::FETCH_ASSOC)) {
                     $lessonSQL = "SELECT * FROM lesson WHERE match_id = :matchid AND (lesson_date BETWEEN :start AND :end)";
@@ -44,9 +47,15 @@ if (isset($_SESSION['USERID'])){
                             $endTime = $lessonRow['lesson_date'] + ($lessonRow['lesson_length'] * 60);
                             $jsondata[] = array('id'=>$lessonRow['lesson_id'],
                                                 'title'=>$lessonRow['lesson_title'],
+                                                'subject'=>$lessonRow['subject_id'],
+                                                'allDay'=> false,
                                                 'color'=>$row['match_colour'],
-                                                'start'=>$lessonRow['lesson_date'],
-                                                'end'=>$endTime,
+                                                'start'=>$lessonRow['lesson_date'] + $date->getOffset(),
+                                                'lessonLength'=>$lessonRow['lesson_length'],
+                                                'lessonLocation'=>$lessonRow['lesson_location'],
+                                                'unixTime'=>$lessonRow['lesson_date'],
+                                                'matchID'=>$lessonRow['match_id'],
+                                                'end'=>$endTime + $date->getOffset(),
                                                 'lessonStatus'=>$lessonRow['statuscode_id'],
                                                 'lessonDesc'=>$lessonRow['lesson_desc'],
                                                 'lessonComments'=>$lessonRow['lesson_comments']);

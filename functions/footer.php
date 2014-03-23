@@ -73,6 +73,7 @@ function displayFooter() {
     <script src="js/jquery.cslider.js"></script>
     <script src="js/modernizr.custom.28468.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/timepicker.js"></script>
     <script src="js/fullcalendar.min.js"></script>
     <script src="js/custom.js"></script>
     <script type="text/javascript">
@@ -171,10 +172,21 @@ function displayFooter() {
 
         $(document).ready(function() {
 
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
+            $(function() {
+                $('#date').datetimepicker({
+                    stepMinute: 15,
+                    dateFormat: 'yy-mm-dd'
+
+                });
+            });
+
+            $(function() {
+                $('#lessonDate').datetimepicker({
+                    stepMinute: 15,
+                    dateFormat: 'yy-mm-dd'
+
+                });
+            });
 
             $('#calendar').fullCalendar({
                 theme: true,
@@ -184,57 +196,129 @@ function displayFooter() {
                     right: 'month,agendaWeek,agendaDay'
                 },
                 editable:false,
-                events: [
-                    {
-
-                        title: 'All Day Event',
-                        start: new Date(y, m, 1)
-                    },
-                    {
-                        title: 'Long Event',
-                        start: new Date(y, m, d-5),
-                        end: new Date(y, m, d-2)
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d-3, 16, 0),
-                        allDay: false
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d+4, 16, 0),
-                        allDay: false
-                    },
-                    {
-                        title: 'Meeting',
-                        start: new Date(y, m, d, 10, 30),
-                        allDay: false
-                    },
-                    {
-                        draggable: false,
-                        title: 'Lunch',
-                        start: new Date(y, m, d, 12, 0),
-                        end: new Date(y, m, d, 14, 0),
-                        allDay: false,
-                        color: 'yellow'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d+1, 19, 0),
-                        end: new Date(y, m, d+1, 22, 30),
-                        allDay: false,
-                        color: 'blue'
-                    },
-                    {
-                        title: 'Click for Google',
-                        start: new Date(y, m, 28),
-                        end: new Date(y, m, 29),
-                        url: 'http://google.com/'
-                    }
-                ]
+                events: 'ajax/scheduleCalendar.php',
+                eventClick: function(calEvent, jsEvent, view) {
+                    $('#updateForm').trigger("reset");
+                    $( "#lessonID").val(calEvent.id);
+                    $( "#matchID").val(calEvent.matchID);
+                    $( "#title").val(calEvent.title);
+                    $( "#date").val(calEvent.start);
+                    $('[name=subjectID]').val(calEvent.subject);
+                    $('#date').datetimepicker('setDate', calEvent.start);
+                    $( "#length").val(calEvent.lessonLength);
+                    $( "#location").val(calEvent.lessonLocation);
+                    $( "#comments").val(calEvent.lessonComments);
+                    $( "#desc").val(calEvent.lessonDesc);
+                    $( "#dialog-form" ).dialog( "open" );
+                }
             });
+
+
+
+            // Dialogue box for updating a lesson.
+            $( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height:600,
+                width: 450,
+                modal: true,
+                buttons: {
+                    <?php
+                    // only tutors should have an update lesson button.
+                    if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 2) {
+                    ?>
+
+                    "Update Lesson": function() {
+                        //alert($( "#updateForm" ).serialize());
+                        $.post("ajax/updateLesson.php",$( "#updateForm" ).serialize(),
+                            function(data) {
+                                if (data == 'success') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Successfully Updated!");
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                }
+                                else if(data == 'unauthorized') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Unauthorized Access Detected.. tisk tisk..");
+                                }
+                                else if(data == 'missing') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Not all required data was entered.. Try again.");
+                                }
+                                else{
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("An Unknown Error Occured!");
+                                }
+                            }
+                        )
+                            .fail( function(xhr, textStatus, errorThrown) {
+                                alert("An Unknown Error Occured!");
+                            })
+                    },<?php } // CLOSE TUTOR SELECT ?>
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+
+                }
+            });
+
+            <?php
+            // only tutors can add new lessons.
+            if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 2) {
+                ?>
+
+            // dialogue form for creating new lessons
+            $( "#dialog-form2" ).dialog({
+                autoOpen: false,
+                height:600,
+                width: 500,
+                modal: true,
+                buttons: {
+                    "Create Lesson": function() {
+                        //alert($( "#createForm" ).serialize());
+                       $.post("ajax/createLesson.php",$( "#createForm" ).serialize(),
+                            function(data) {
+                                if (data == 'success') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Successfully Created!");
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                }
+                                else if(data == 'unauthorized') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Unauthorized Access Detected.. tisk tisk..");
+                                }
+                                else if(data == 'missing') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Not all required data was entered.. Try again.");
+                                }
+                                else{
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("An Unknown Error Occured!");
+                                }
+                            }
+                        )
+                            .fail( function(xhr, textStatus, errorThrown) {
+                               // this is a failsafe for any network issues as the above will not capture it.
+                                alert("An Unknown Error Occured!");
+                            })
+                    },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+
+                }
+            });
+
+            $("#newLessonLink").click(function(){
+                $('#createForm').trigger("reset");
+                $( "#dialog-form2" ).dialog( "open" );
+            });
+                <?php
+                    } // end create lesson form
+                ?>
 
             // ajax call for notifications
             $.ajax({ // ajax call starts

@@ -17,7 +17,7 @@ function displayUserArea() {
                 <div class="col-md-4 col-sm-4">
                     <!-- Logo and site link -->
                     <div class="logo">
-                        <a href="index.html"><img  src="img/logo.png" alt="TutleZone Logo"/></a>
+                        <a href="index.php"><img  src="img/logo.png" alt="TutleZone Logo"/></a>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-sm-offset-4 col-md-offset-4">
