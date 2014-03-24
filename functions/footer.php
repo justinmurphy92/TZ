@@ -253,7 +253,7 @@ function displayFooter() {
                 modal: true,
                 buttons: {
                     "Create Lesson": function() {
-                        //alert($( "#createForm" ).serialize());
+                        alert($( "#createForm" ).serialize());
                        $.post("ajax/createLesson.php",$( "#createForm" ).serialize(),
                             function(data) {
                                 if (data == 'success') {
@@ -296,6 +296,102 @@ function displayFooter() {
                 <?php
                     } // end create lesson form
                 ?>
+
+            <?php
+            // only those logged in can take sick days.
+            if (isset($_SESSION['USERID'])) {
+                ?>
+            // dialogue form for creating new lessons
+            $( "#sickday" ).dialog({
+                autoOpen: false,
+                height: 'auto',
+                width: 500,
+                modal: true,
+                buttons: {
+                    "Take Sick Day": function() {
+                        //alert($( "#sickForm" ).serialize());
+                        $.post("ajax/sickDay.php",$( "#sickForm" ).serialize(),
+                            function(data) {
+                                if (data == 'error' || data == 'failure') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Could not process your request.");
+                                }
+                                else if (data == 'missing') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Not all required fields were filled in.");
+                                }
+                                else{
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Sick Day Request Successful. " + data + " Lessons Cancelled.");
+                                }
+                            }
+                        )
+                            .fail( function(xhr, textStatus, errorThrown) {
+                                // this is a failsafe for any network issues as the above will not capture it.
+                                alert("An Unknown Error Occured!");
+                            })
+                    },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+
+                }
+            });
+
+            $("#sickDayLink").click(function(){
+                $("#sickForm").trigger("reset");
+                $( "#sickday" ).dialog( "open" );
+            });
+            <?php
+                } // end sick day
+            ?>
+
+            $( "#dialog-form3" ).dialog({
+                autoOpen: false,
+                height: 'auto',
+                width: 500,
+                modal: true,
+                buttons: {
+                    "Submit Payment": function() {
+                        alert($( "#paymentForm" ).serialize());
+                        /*$.post("ajax/sickDay.php",$( "#sickForm" ).serialize(),
+                            function(data) {
+                                if (data == 'error' || data == 'failure') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Could not process your request.");
+                                }
+                                else if (data == 'missing') {
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Not all required fields were filled in.");
+                                }
+                                else{
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                    $('.ui-dialog-content').dialog('close');
+                                    alert("Sick Day Request Successful. " + data + " Lessons Cancelled.");
+                                }
+                            }
+                        )
+                            .fail( function(xhr, textStatus, errorThrown) {
+                                // this is a failsafe for any network issues as the above will not capture it.
+                                alert("An Unknown Error Occured!");
+                            }) */
+                    },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+
+                }
+            });
+
+            $("#newPayment").click(function(){
+                $("#paymentForm").trigger("reset");
+                $( "#dialog-form3" ).dialog( "open" );
+            });
 
             // ajax call for notifications
             $.ajax({ // ajax call starts

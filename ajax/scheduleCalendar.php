@@ -45,11 +45,17 @@ if (isset($_SESSION['USERID'])){
                     if ($lessonQuery->execute()){
                         while ($lessonRow = $lessonQuery->fetch(PDO::FETCH_ASSOC)){
                             $endTime = $lessonRow['lesson_date'] + ($lessonRow['lesson_length'] * 60);
+                            $borderColour = "";
+                            if ($lessonRow['statuscode_id'] == 8) {
+                                $borderColour = "red";
+                            }
+
                             $jsondata[] = array('id'=>$lessonRow['lesson_id'],
                                                 'title'=>$lessonRow['lesson_title'],
                                                 'subject'=>$lessonRow['subject_id'],
                                                 'allDay'=> false,
                                                 'color'=>$row['match_colour'],
+                                                'borderColor'=>$borderColour,
                                                 'start'=>$lessonRow['lesson_date'] + $date->getOffset(),
                                                 'lessonLength'=>$lessonRow['lesson_length'],
                                                 'lessonLocation'=>$lessonRow['lesson_location'],

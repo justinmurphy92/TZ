@@ -30,14 +30,14 @@ function displayNavigation() {
                     <li><a href="index.php"> Home </a></li>
                     <li><a href="lessons.php"> Lessons </a></li>
                     <li><a href="notifications.php"> Notifications </a></li>
-                    <?php if($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1){
+                    <?php if(isset($_SESSION['TYPECODE_ID']) && ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1)){
                         echo "<li><a href='invoices.php'>Invoices</a>";
 
                     }
-                    elseif ($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2){
+                    elseif (isset($_SESSION['TYPECODE_ID']) && ($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2)){
                         echo "<li><a href='payments.php'>Payments</a>";
                     }
-                    elseif ($_SESSION['TYPECODE_ID'] == '3' || $_SESSION['TYPECODE_ID'] == 3){
+                    else {
                         echo '
                          <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages #2 <b class="caret"></b></a>

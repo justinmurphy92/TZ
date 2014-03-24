@@ -18,11 +18,11 @@ function loadMatches() {
                     $matchSQL = "";
                     if ($_SESSION['TYPECODE_ID'] == 1) {
                         //student
-                        $matchSQL = "select match_id, match_colour, tutor_fname as 'fname', tutor_lname as 'lname' from matches JOIN tutor on tutor_userid = credentials_userid where student_userid =:userid";
+                        $matchSQL = "select match_id, match_colour, tutor_fname as 'fname', tutor_lname as 'lname', credentials_userid from matches JOIN tutor on tutor_userid = credentials_userid where student_userid =:userid";
                     }
                     elseif($_SESSION['TYPECODE_ID'] == 2) {
                         // tutor
-                        $matchSQL = "select match_id, match_colour, student_fname as 'fname', student_lname as 'lname' from matches JOIN student on student_userid = credentials_userid where tutor_userid =:userid";
+                        $matchSQL = "select match_id, match_colour, student_fname as 'fname', student_lname as 'lname', credentials_userid from matches JOIN student on student_userid = credentials_userid where tutor_userid =:userid";
                     }
 
                     // if the sql isn't empty by now (not a tutor or student)
@@ -41,7 +41,8 @@ function loadMatches() {
                                 $_SESSION['matches'][] = array('match_id' => $row['match_id'],
                                     'match_colour' => $row['match_colour'],
                                     'fname' => $row['fname'],
-                                    'lname' => $row['lname']);
+                                    'lname' => $row['lname'],
+                                    'match_userid' => $row['credentials_userid']);
 
                             }
                             // if it got here, everything worked well.  set the time.

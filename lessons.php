@@ -192,6 +192,44 @@ if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPE
 } // end lesson create
 ?>
 
+    <!-- This is the dialog box for taking sick days.  Only those logged in can take sick days. -->
+<?php
+// we only want to allow students/tutors who are logged in the acccess to do this.
+if (isset($_SESSION['USERID'])) {
+    ?>
+
+    <div id="sickday" class="form" title="Take a Sick Day">
+        <p id="dialogPurpose"> Taking a sick day cancels all of your lessons for the day & notifies the other parties involved in each lesson.
+        <strong>This cannot be undone.</strong>  </p>
+        <p>  By entering a message using the box provided below, you are able to customize your message.  This might be a good place to alert your student/tutor when a good time to reschedule might be.</p>
+
+
+        <form id="sickForm" class="form-horizontal" method="POST" action="#">
+
+            <!-- message -->
+            <div class="form-group">
+                <label class="control-label col-md-3" for="sickMessage">Customized Sick Message</label>
+                <div class="col-md-9">
+                    <textarea class="form-control" name="sickMessage" id="sickMessage"></textarea>
+                </div>
+            </div>
+
+            <!-- confirmation checkbox -->
+            <div class="form-group">
+                <div class="col-md-7  col-md-offset-3">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="Yes" name="sickConfirm"/> Are you <strong> ABSOLUTELY </strong> sure?
+                    </label>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+<?php
+} // end sick day
+?>
+
 <div class="content">
     <div class="container">
         <div class="row">
@@ -222,8 +260,14 @@ if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPE
                         <?php // only tutors can create lessons
                         if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 2) { ?>
                         <li class="button"> Create/Schedule A New Lesson <br/> <a id="newLessonLink" style="width:100%"> Create Lesson </a></li>
-                        <?php } ?>
-                        <li class="button"> Not Feeling Well? Take a Sick Day.  We'll cancel all your lessons for the day & notify the other parties. <br/> <a href="#" style="width:100%"> I'm Sick! </a></li>
+                        <?php }
+                        // only those logged in can take sick days.
+                        if (isset($_SESSION['USERID'])) {
+                        ?>
+                        <li class="button"> Not Feeling Well? Take a Sick Day.  We'll cancel all your lessons for the day & notify the other parties. Lessons with a red border are "cancelled"<br/> <a id="sickDayLink" style="width:100%"> I'm Sick! </a></li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
