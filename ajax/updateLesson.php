@@ -38,13 +38,14 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonID'])){
                 }
 
                 // if we got here, the user is authorized, so let's update the lesson
-                $updateSQL = "UPDATE lesson SET lesson_title=:title, subject_id=:subject, lesson_date=unix_timestamp(:date), lesson_length=:length, lesson_location=:location, lesson_comments=:comments, lesson_desc=:desc WHERE lesson_id=:lessonID AND match_id=:matchID";
+                $updateSQL = "UPDATE lesson SET lesson_title=:title, subject_id=:subject, lesson_date=unix_timestamp(:date), lesson_length=:length, lesson_location=:location, statuscode_id = :status, lesson_comments=:comments, lesson_desc=:desc WHERE lesson_id=:lessonID AND match_id=:matchID";
                 $updateQuery = $db->prepare($updateSQL);
                 $updateQuery->bindValue(':title', $_POST['title']);
                 $updateQuery->bindValue(':subject', $_POST['subjectID']);
                 $updateQuery->bindValue(':date', $_POST['date']);
                 $updateQuery->bindValue(':length', $_POST['length']);
                 $updateQuery->bindValue(':location', $_POST['location']);
+                $updateQuery->bindValue(':status', $_POST['status']);
                 $updateQuery->bindValue(':comments', $_POST['comments']);
                 $updateQuery->bindValue(':desc', $_POST['desc']);
                 $updateQuery->bindValue(':lessonID', $_POST['lessonID']);

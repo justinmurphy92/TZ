@@ -72,9 +72,11 @@ function loadMatches() {
     // return false if the user isn't logged in.
     return false;
 }
+
+// loads all subjects into session scope, for use in forms throughout the site.
 function loadSubjects() {
     // check to see if they have been loaded.
-    if (!isset($_SESSION['subjects']) || (time() - $_SESSION['subjectsSet']) / 60 > 60) {
+    if (!isset($_SESSION['subjects']) || (time() - $_SESSION['subjectsSet']) / 60 > 120) {
         $db = connectToDB();
         if ($db)
         {
@@ -96,6 +98,46 @@ function loadSubjects() {
                     // if at least one subject has been loaded, return true, making them available to all.
                     // set a timestamp so they can be reloaded appropriately.
                     $_SESSION['subjectsSet'] = time();
+                    return true;
+                }
+
+            }
+            catch(Exception $e){
+                // just in case, return false on any errors.
+                return false;
+            }
+        }
+    } else {
+        // they are already loaded.
+        return true;
+    }
+}
+
+// loads all lesson statuses into session scope, for use in forms throughout the site.
+function loadLessonStatus() {
+    // check to see if they have been loaded.
+    if (!isset($_SESSION['lesson_status']) || (time() - $_SESSION['lesson_status_set']) / 60 > 120) {
+        $db = connectToDB();
+        if ($db)
+        {
+            try{
+                //default to null (avoids duplication on reload)
+                $_SESSION['lesson_status'] = null;
+
+                $sql = "SELECT * FROM statuscode where statuscode_active = true order by statuscode_abbr";
+                $query = $db->query($sql);
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                    // load the lesson statuses into session scope.
+                    $_SESSION['lesson_status'][] = array('id'=> $row['statuscode_id'],
+                        'name'=>$row['statuscode_abbr'],
+                        'desc'=>$row['statuscode_desc']);
+                }
+
+                if (count($_SESSION['lesson_status']) > 0)
+                {
+                    // if at least one status has been loaded, return true, making them available to all.
+                    // set a timestamp so they can be reloaded appropriately.
+                    $_SESSION['lesson_status_set'] = time();
                     return true;
                 }
 

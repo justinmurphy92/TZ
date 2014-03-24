@@ -78,6 +78,22 @@ It is hidden by  default -->
             </div>
         </div>
 
+        <!-- Lesson Status -->
+        <div class="form-group">
+            <label class="control-label col-md-3" for="status">Lesson Status</label>
+            <div class="col-md-9">
+                <select name="status" class="form-control" id="status">
+                    <?php
+                    if (loadLessonStatus()){
+                        foreach($_SESSION['lesson_status'] as $thisStatus){
+                            echo "<option value='" . $thisStatus['id'] . "'>" . $thisStatus['name'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
         <!-- comments -->
         <div class="form-group">
             <label class="control-label col-md-3" for="comments">Comments</label>
@@ -103,7 +119,7 @@ It is hidden by  default.  Only tutors can create new lessons. -->
 if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPECODE_ID'] == 2 && loadSubjects()) {
     ?>
 
-    <div id="dialog-form2" class="form" title="Update a Lesson">
+    <div id="dialog-form2" class="form" title="Create a Lesson">
         <p id="dialogPurpose"> Create a Lesson! </p>
 
         <form id="createForm" class="form-horizontal" method="POST" action="#">
@@ -167,6 +183,22 @@ if (isset($_SESSION['USERID']) && isset($_SESSION['matches']) && $_SESSION['TYPE
                 <label class="control-label col-md-3" for="location">Location</label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" id="lessonLocation" name="lessonLocation">
+                </div>
+            </div>
+
+            <!-- Lesson Status -->
+            <div class="form-group">
+                <label class="control-label col-md-3" for="status">Lesson Status</label>
+                <div class="col-md-9">
+                    <select name="lessonStatus" class="form-control" id="lessonStatus">
+                        <?php
+                        if (loadLessonStatus()){
+                            foreach($_SESSION['lesson_status'] as $thisStatus){
+                                echo "<option value='" . $thisStatus['id'] . "'>" . $thisStatus['name'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
 

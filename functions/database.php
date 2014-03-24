@@ -101,6 +101,31 @@ function createTransaction($match, $length, $date){
 
 }
 
+function newestMembers() {
+    $db = connectToDB();
+
+    if($db){
+        try{
+            $sql = " SELECT credentials.CREDENTIALS_USERID as 'userid', CREDENTIALS_USERNAME as 'username', TYPECODE_ID as 'type', COALESCE( tutor_fname, student_fname ) AS 'fname', COALESCE( tutor_lname, student_lname ) AS 'lname'
+                     FROM credentials
+                     LEFT JOIN student ON credentials.credentials_userid = student.credentials_userid
+                     LEFT JOIN tutor ON credentials.credentials_userid = tutor.credentials_userid
+                     ORDER BY credentials_create_date DESC
+                     LIMIT 5 ";
+            $query = $db->prepare($sql);
+            $query->execute();
+            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+               echo "<li><a href='viewProfile.php?userid=" . $row['userid'] . "&type=" . $row['type'] . "'> " . $row['fname'] . " " . $row['lname'] . " </a></li>";
+            }
+
+        }
+        catch (PDOException $e){
+            writeLog('DB', $e);
+        }
+
+    }
+}
+
 
 
 

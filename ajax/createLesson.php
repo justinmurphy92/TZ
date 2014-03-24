@@ -38,7 +38,7 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonMatchID'])){
                     $studentID = $row['student_userid'];
                 }
 
-                $insertSQL = "INSERT INTO lesson(match_id, subject_id, lesson_date, lesson_length, lesson_title, lesson_desc, lesson_location, lesson_comments) VALUES(:matchID, :subjectID, unix_timestamp(:lessonDate), :length, :title, :desc, :location, :comments)";
+                $insertSQL = "INSERT INTO lesson(match_id, subject_id, lesson_date, lesson_length, lesson_title, lesson_desc, lesson_location, statuscode_id, lesson_comments) VALUES(:matchID, :subjectID, unix_timestamp(:lessonDate), :length, :title, :desc, :location, :lessonStatus, :comments)";
                 // if we got here, the user is authorized, so let's update the lesson
                 $insertQuery = $db->prepare($insertSQL);
                 $insertQuery->bindValue(':matchID', $_POST['lessonMatchID']);
@@ -48,6 +48,7 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonMatchID'])){
                 $insertQuery->bindValue(':title', $_POST['lessonTitle']);
                 $insertQuery->bindValue(':desc', $_POST['lessonDesc']);
                 $insertQuery->bindValue(':location', $_POST['lessonLocation']);
+                $insertQuery->bindValue(':lessonStatus', $_POST['lessonStatus']);
                 $insertQuery->bindValue(':comments', $_POST['lessonComments']);
 
 
