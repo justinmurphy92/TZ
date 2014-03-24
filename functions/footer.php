@@ -31,11 +31,9 @@ function displayFooter() {
                     <div class="widget">
                         <h4>Our Newest Members!</h4>
                         <ul>
-                            <li><a href="#">New Member # 1</a></li>
-                            <li><a href="#">New Member # 2</a></li>
-                            <li><a href="#">New Member # 3</a></li>
-                            <li><a href="#">New Member # 4</a></li>
-                            <li><a href="#">New Member # 5</a></li>
+                            <?php
+                            newestMembers();
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -181,6 +179,7 @@ function displayFooter() {
                     $( "#title").val(calEvent.title);
                     $( "#date").val(calEvent.start);
                     $('[name=subjectID]').val(calEvent.subject);
+                    $('[name=status]').val(calEvent.lessonStatus);
                     $('#date').datetimepicker('setDate', calEvent.start);
                     $( "#length").val(calEvent.lessonLength);
                     $( "#location").val(calEvent.lessonLocation);
@@ -248,12 +247,12 @@ function displayFooter() {
             // dialogue form for creating new lessons
             $( "#dialog-form2" ).dialog({
                 autoOpen: false,
-                height:600,
+                height:700,
                 width: 500,
                 modal: true,
                 buttons: {
                     "Create Lesson": function() {
-                        alert($( "#createForm" ).serialize());
+                        //alert($( "#createForm" ).serialize());
                        $.post("ajax/createLesson.php",$( "#createForm" ).serialize(),
                             function(data) {
                                 if (data == 'success') {
@@ -291,6 +290,7 @@ function displayFooter() {
 
             $("#newLessonLink").click(function(){
                 $("#createForm").trigger("reset");
+                $('[name=lessonStatus]').val(1); // default to "pending"
                 $( "#dialog-form2" ).dialog( "open" );
             });
                 <?php
@@ -301,7 +301,7 @@ function displayFooter() {
             // only those logged in can take sick days.
             if (isset($_SESSION['USERID'])) {
                 ?>
-            // dialogue form for creating new lessons
+            // dialogue form for taking a sick day
             $( "#sickday" ).dialog({
                 autoOpen: false,
                 height: 'auto',

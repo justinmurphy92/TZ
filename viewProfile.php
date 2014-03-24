@@ -5,9 +5,8 @@
  * Date: 3/23/2014
  * Time: 4:22 PM
  */
-session_start();
-include('functions/footer.php');
 include('functions/header.php');
+include('functions/footer.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
