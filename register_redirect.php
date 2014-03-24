@@ -32,7 +32,7 @@ catch (PDOException $e){
 }
 
 if (empty($fname) || empty($lname) || empty($email) || empty($username) || empty($password) || empty($vPassword) || empty($type) || !isset($_POST['terms']) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $password <> $vPassword || $count > 0 ){
-    header('Location: register.php');
+    header('Location: register.php?error=3');
 }
 else{
     $_SESSION['fname'] = $fname;
