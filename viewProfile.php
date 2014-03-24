@@ -14,8 +14,8 @@ include('functions/database.php');
 
 
 displayHeader('TutleZone - Home');
-displayUserArea(0);
-displayNavigation(0);
+displayUserArea();
+displayNavigation();
 $db = connectToDB();
 
 if ($_GET['type'] == '1' || $_GET['type'] == 1){
@@ -42,10 +42,10 @@ catch (PDOException $e) {
         <div class="container">
                     <?php
                     if ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1){
-                        echo "<div class='button'><a href='#'>ASK TO BE YOUR TUTOR </a></div>";
+                        echo "<div class='button'><a href='requestMatch.php?user=".$_GET['userid']."'>ASK TO BE YOUR TUTOR </a></div>";
                     }
                     elseif($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2){
-                        echo "<div class='button'><a href='#'>ASK TO BE YOUR TUTOR </a></div>";
+                        echo "<div class='button'><a href='requestMatch.php?user=".$_GET['userid']."'>ASK TO BE YOUR TUTOR </a></div>";
                     }
                     ?>
             <div class="row">
@@ -118,4 +118,4 @@ catch (PDOException $e) {
 
     <!-- Content ends -->
 
-<?php displayFooter(0);?>
+<?php displayFooter();?>

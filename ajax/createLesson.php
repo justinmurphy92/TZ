@@ -59,6 +59,7 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonMatchID'])){
                     $date = DateTime::createFromFormat("Y-m-d H:i", $_POST['lessonDate']);
 
                     $content = "A lesson has been scheduled between you and " . $_SESSION['FNAME'] . " " . $_SESSION['LNAME'] . ". It is scheduled for: " . $date->format('D, M jS @ g:ia');
+                    createTransaction($_POST['lessonMatchID'], $_POST['lessonLength'], $_POST['lessonDate']);
                     insertNotification($studentID, $content);
 
                     echo "success";

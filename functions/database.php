@@ -68,6 +68,39 @@ function insertNotification($userID, $content){
 
 }
 
+function createTransaction($match, $length, $date){
+    $db = connectToDB();
+
+    if($db){
+        try{
+            $sql = "SELECT * FROM matches WHERE match_id = :matchid";
+            $query = $db->prepare($sql);
+            $query->bindValue(':matchid', $match);
+
+            $query->execute();
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $e){
+            writeLog('DB', $e);
+        }
+        $lessonTotal = $length * $row['match_rop'];
+
+        try{
+            $sql = "INSERT INTO transaction(match_id, transaction_amount, transaction_date, method_id) VALUE (:matchID, :amount, :tranDate)";
+            $query = $db->prepare($sql);
+            $query->bindValue(':matchID', $match);
+            $query->bindValue(':amount', $lessonTotal);
+            $query->bindValue(':tranDate', $date);
+        }
+        catch (PDOException $e){
+            writeLog('DB', $e);
+        }
+    }
+
+
+
+}
+
 
 
 
