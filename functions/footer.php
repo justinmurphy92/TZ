@@ -175,7 +175,7 @@ function displayFooter() {
                 editable:false,
                 events: 'ajax/scheduleCalendar.php',
                 eventClick: function(calEvent, jsEvent, view) {
-                    $('#updateForm').trigger("reset");
+                    $( "#updateForm").trigger("reset");
                     $( "#lessonID").val(calEvent.id);
                     $( "#matchID").val(calEvent.matchID);
                     $( "#title").val(calEvent.title);
@@ -290,7 +290,7 @@ function displayFooter() {
             });
 
             $("#newLessonLink").click(function(){
-                $('#createForm').trigger("reset");
+                $("#createForm").trigger("reset");
                 $( "#dialog-form2" ).dialog( "open" );
             });
                 <?php
@@ -320,6 +320,27 @@ function displayFooter() {
                     }
 
                 });
+
+
+            // ajax call for schedule events
+            $.ajax({ // ajax call starts
+                url: 'ajax/scheduleQuickList.php',
+                dataType: 'json',
+                success: function(data) // Variable data contains the data we get from serverside
+                {
+                    $('#scheduleList').html('');
+                    $('#scheduleList').append('<li><a href="lessons.php">GOTO: Lessons Page</a></li>');
+
+
+                    $.each(data, function(index, element) {
+                        $('#scheduleCount').html('');
+                        $('#scheduleCount').append(index + 1);
+                        $('#scheduleList').prepend('<li><a href="lessons.php?id=' + element.id + '"><strong style="font-size:70%;">' + element.date + '</strong><br/>With: ' + element.party + '</li>');
+                    });
+
+                }
+
+            });
             });
 
     </script>

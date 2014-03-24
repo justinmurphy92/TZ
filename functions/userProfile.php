@@ -60,7 +60,7 @@ function displayUserArea() {
                             New Notifications
                             <div class="notification-box dropdown-box">
                                 <ul id="notificationList">
-                                    <li><a href="#">GOTO: Notifications Page</a></li>
+                                    <li><a href="notifications.php">GOTO: Notifications Page</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -68,11 +68,11 @@ function displayUserArea() {
                         <!-- User Schedule -->
                         <div class="schedule">
                             <i class="icon-calendar color"></i>
-                            <span class="label label-danger">X</span>
+                            <span class="label label-danger" id="scheduleCount"></span>
                             Lessons < 24 hours
                             <div class="schedule-box dropdown-box">
-                                <ul>
-                                    <li><a href="#">GOTO: Scheduling Page </a></li>
+                                <ul id="scheduleList">
+                                    <li><a href="lessons.php">GOTO: All Lessons </a></li>
                                 </ul>
                             </div>
                         </div>
