@@ -39,7 +39,6 @@ elseif($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2){
 
 $sql = "SELECT * FROM ".$userType." WHERE credentials_userid = ".$_SESSION['USERID'];
 
-echo $sql;
 try{
     //get user details and save to an array
     $rs = $db->query($sql);
@@ -129,7 +128,7 @@ catch (PDOException $e) {
                         echo "</table>";
                         $_SESSION['row'] = $row;
                         ?>
-                        <input type="submit" class="btn btn-default">Save</button>
+                        <input type="submit" class="btn btn-default" value="Save"/>
                     </form>
                 </div>
             </div>
