@@ -169,12 +169,7 @@ elseif ($type == 'Tutor'){
             writelog('DB',$e);
         }
 
-        //prepare query
-        $sql = "SELECT * FROM subject WHERE subject_name = '".$subject."'";
-        //run query
-        $rs = $db->query($sql);
-        $row = $rs->fetch(PDO::FETCH_ASSOC);
-        $subjectID = $row['subject_id'];
+        $subjectID = $_POST['subject'];
 
         //prepare query
         $sql = "INSERT INTO expertise (tutor_id, subject_id) VALUE (:tutorID, :subjectID)";
@@ -187,8 +182,8 @@ elseif ($type == 'Tutor'){
              if($query->execute()){
                 $_SESSION['USERID'] = $userid;
                 $_SESSION['TYPECODE_ID'] = 2;
-                $_SESSION['fname'] = $fname;
-                $_SESSION['lname'] = $lname;
+                $_SESSION['FNAME'] = $fname;
+                $_SESSION['LNAME'] = $lname;
 
                 header('Location: index.php');
              }
