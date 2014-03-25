@@ -4,7 +4,12 @@
  * Analyst:     Adam Howatt
  *      DATE        INITIALS        CHANGES
  *      03/22/2014  JM              INITIAL CREATION
+ *
+ * DESCRIPTION:
+ * THIS PAGE IS WHERE USERS WILL VIEW OTHER PEOPLES PROFILES
  */
+
+//inlude required functions
 include('functions/header.php');
 include('functions/footer.php');
 include('functions/navbar.php');
@@ -15,6 +20,8 @@ include('functions/database.php');
 displayHeader('TutleZone - Home');
 displayUserArea();
 displayNavigation();
+
+//connect to database
 $db = connectToDB();
 
 if ($_GET['type'] == '1' || $_GET['type'] == 1){
@@ -28,6 +35,7 @@ $sql = "SELECT * FROM ".$userType." WHERE credentials_userid = ".str_replace('"'
 
 
 try{
+    //get information to build the page
     $rs = $db->query($sql);
     $row = $rs->fetch(PDO::FETCH_ASSOC);
 }
@@ -40,6 +48,7 @@ catch (PDOException $e) {
     <div class="content">
         <div class="container">
                     <?php
+                    //request match button
                     if (isset($_SESSION['USERID']) && ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1)){
                         echo "<div class='button'><a href='requestMatch.php?user=".$_GET['userid']."'>ASK TO BE YOUR TUTOR </a></div>";
                     }
@@ -61,6 +70,7 @@ catch (PDOException $e) {
                     <div class="support-page col-md-6">
                         <hr />
                         <p>
+                            <!--dynamically build profile page -->
                             <strong>First Name: </strong><?php echo $row[$userType.'_fname'];?><br/>
                             <strong>Last Name: </strong><?php echo $row[$userType.'_lname'];?><br/>
                             <strong>Address: </strong><?php echo $row[$userType.'_address'];?><br/>

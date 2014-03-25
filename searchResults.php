@@ -4,8 +4,12 @@
  * Analyst:     Adam Howatt
  *      DATE        INITIALS        CHANGES
  *      03/20/2014  JM              INITIAL CREATION
+ *
+ * DESCRIPTION:
+ * THIS PAGE IS DYNAMICALLY BUILT WHEN THE SEARCH IS COMPLETE
  */
 
+//include required classes
 include('functions/footer.php');
 include('functions/header.php');
 include('functions/navbar.php');
@@ -38,6 +42,7 @@ displayNavigation(0);
                             <div class="accordion" id="accordion2">
                                 <!-- Each item should be enclosed inside the class "accordion-group". Note down the below markup. -->
                                 <?php
+                                        //fille page with search results
                                         $counter = 1;
                                         foreach($_SESSION['results'] as $results){
 

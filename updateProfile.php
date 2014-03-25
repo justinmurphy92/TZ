@@ -4,6 +4,9 @@
  * Analyst:     Adam Howatt
  *      DATE        INITIALS        CHANGES
  *      03/16/2014  JM              INITIAL CREATION
+ *
+ * DESCRIPTION:
+ * THIS FUNCTION WILL DYNAMICALLY CREATE AN UPDATE QUERY BASED ON THE WHETHER OR NOT DATA WAS CHANGED
  */
 //start session and open DB connection
 session_start();
@@ -106,13 +109,15 @@ elseif($userType == 'tutor'){
 }
 
 if($moreThanOne){
+    //if anthing has changes, submit the update
     try{
         $sql = $sql." WHERE credentials_userid = ".$_SESSION['USERID'];
         $rs = $db->query($sql);
     }
     catch (PDOException $e){
+        //catch exception and write to log
         writeLog('DB', $e);
     }
 }
-
+//redirect to profile page where new data can be seen
 header('Location: profile.php');

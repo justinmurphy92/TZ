@@ -4,6 +4,10 @@
  * Analyst:     Adam Howatt
  *      DATE        INITIALS        CHANGES
  *      03/06/2014  JM              INITIAL CREATION
+ *
+ * DESCRIPTION:
+ *
+ * A SIMPLE TERMS OF AGREEMENT PAGE
  */
 ?>
 <!-- Content strats -->

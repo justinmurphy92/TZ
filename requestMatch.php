@@ -28,7 +28,7 @@ if(isset($_GET['user']) && isset($_SESSION['USERID'])){
     $sql = "INSERT INTO matches (match_colour, student_userid, tutor_userid, match_rop, matches_type) VALUES (:colour, :student, :tutor, :rop, :match_type)";
     $query = $db->prepare($sql);
 
-
+    //bind query
     if ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1){
         $query->bindValue(':student', $_SESSION['USERID']);
         $query->bindValue(':tutor', $_GET['user']);
@@ -44,13 +44,16 @@ if(isset($_GET['user']) && isset($_SESSION['USERID'])){
     $query->bindValue(':rop', '20');
     $query->bindValue(':match_type', '0');
     try{
+        //execute query
         if($query->execute()){
             insertNotification($_GET['user'], $content);
             $url = "Location: viewProfile.php?userid=".$_GET['user']."&type=".$userType;
+            //redirect to view profile
             header($url);
         }
     }
     catch (PDOException $e){
+        //catch exception and write to log
         writeLog('DB', $e);
     }
 }
