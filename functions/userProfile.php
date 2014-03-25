@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 06/03/14
- * Time: 6:07 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/06/2014  AH              INITIAL CREATION
+ *
  * Purpose:
  * The user profile section contains a sneak peek at new notifications, schedule events, and provides search functionality.
  */

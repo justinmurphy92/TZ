@@ -1,11 +1,17 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/23/2014
- * Time: 11:14 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/22/2014  JM              INITIAL CREATION
+ *      03/23/2014  JM              FIXED QUERIES
+ *      03/24/2014  JM              ADDED JQUERY EVENTS
+ *
+ * DESCRIPTION:
+ * THIS PAGE IS FOR TUTORS TO CREATE PAYMENTS AND VIEW PAST PAYMENTS
  */
 
+//include needed classes
 include('functions/footer.php');
 include('functions/header.php');
 include('functions/navbar.php');
@@ -18,6 +24,7 @@ displayHeader('TutleZone - Home');
 displayUserArea(0);
 displayNavigation(0);
 ?>
+    <!--create payment form: this will only appear when a user clicks create payment -->
     <div id="dialog-form3" class="form" title="Create Payment">
         <p id="dialogPurpose"> Create A Payment! </p>
 
@@ -31,6 +38,7 @@ displayNavigation(0);
                 <div class="col-md-9">
                     <select name="matchID" class="form-control" id="matchID">
                         <?php
+                        //populates the student dropdown by invoking the loadMatches function
                         if (loadMatches()){
                             foreach($_SESSION['matches'] as $thisMatch){
                                 echo "<option value='" . $thisMatch['match_id'] . "'>" . $thisMatch['fname'] ." ".$thisMatch['lname']."</option>";
@@ -97,6 +105,7 @@ displayNavigation(0);
                                     <h4 style="padding-top:84px; padding-left:70px">Past Payments -------- ></h4>
                                 </div>
                                 <?php
+                                //writes the past payments to the page
                                 $resultArray;
                                 $resultArray1;
                                     $db = connectToDB();

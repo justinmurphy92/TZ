@@ -1,17 +1,30 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/10/2014
- * Time: 7:19 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/10/2014  JM              INITIAL CREATION
+ *      03/11/2014  JM              ADDED ERROR LOGIN
+ *      03/12/2014  AH              ADDED INSERT NOTIFICATION
+ *      03/14/2014  AH              ADDED UNDEFINED ERROR
+ *      03/14/2014  JM              ADDED IMG ERROR
+ *      03/24/2014  JM              ADDED CREATE TRANSACTION
+ *      03/24/2014  AH              ADDED NEWEST MEMBER
+ *      03/24/2014  JM              CHANGED TRANSACTION METHOD ID TO 4
+ *
+ * DESCRIPTION:
+ * THIS CLASS HOLDS COMMON DATABASE FUNCTION TO BE CALLED BY OTHER PAGES
  */
 
+//define the types of error
 define("DB", "DB ERROR");
 define("UNDEFINED", "MISC ERROR");
 define("IMG", "IMAGE UPLOAD ERROR");
 
 function writeLog($errorClass, $e){
+    //file path to the log
     $FILENAME = 'tzLog.txt';
+    //set a proper time stamp
     $timestamp = date('F dS Y h:i:s');
     switch($errorClass)
     {
@@ -24,11 +37,11 @@ function writeLog($errorClass, $e){
             $errorClass = UNDEFINED;
             break;
     }
+    //write error to log
     $error = $e->getFile()." ". $e->getLine(). "\n MESSAGE: ". $e->getMessage() ."\n";
     $writeQueue = "************************************************ \n". $errorClass . " -> " . $timestamp . ":\n". $error;
     file_put_contents($FILENAME, $writeQueue, FILE_APPEND);
 
-    echo "<script>alert('".$writeQueue."')</script>";
 }
 
 // used to connect to the DB And return the connection string
@@ -67,7 +80,7 @@ function insertNotification($userID, $content){
     }
 
 }
-
+//used to create a transaction in the transaction table
 function createTransaction($match, $length, $date){
     $db = connectToDB();
 
@@ -91,7 +104,7 @@ function createTransaction($match, $length, $date){
             $query->bindValue(':matchID', $match);
             $query->bindValue(':amount', $lessonTotal);
             $query->bindValue(':tranDate', $date);
-            $query->bindValue(':methodID', 0);
+            $query->bindValue(':methodID', 4);
 
             $query->execute();
 
@@ -107,6 +120,7 @@ function createTransaction($match, $length, $date){
 
 }
 
+//used to generate the newest members display on the footer
 function newestMembers() {
     $db = connectToDB();
 

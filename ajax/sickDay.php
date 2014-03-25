@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 12/03/14
- * Time: 6:06 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/12/2014  AH              INITIAL CREATION
+ *
  * Used to cancel all lessons for a specific day.
  * Loops through all matches for a specific user, and checks to see if any of those matches have any lessons scheduled.
  * if so, change the status of said lessons to "Sick" & creates notifications for the other users.

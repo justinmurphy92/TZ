@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:17 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/06/2014  JM              INITIAL CREATION
  */
 ?>
 <!-- Content strats -->
@@ -315,105 +315,6 @@ Section 21.4
 What is the website operator's contact email address? What is the website operator's contact telephone number?
 </p>
 
-
-
-
-
-<!-- CTA starts -->
-
-<div class="cta">
-    <div class="row">
-        <div class="col-md-9">
-            <!-- First line -->
-            <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
-            <!-- Second line -->
-            <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
-        </div>
-        <div class="col-md-2">
-            <!-- Button -->
-            <div class="button"><a href="#">Get A Free Trail</a></div>
-        </div>
-    </div>
-</div>
-
-<!-- CTA Ends -->
-
-<!-- Recent post starts. Note down the class name before editing. -->
-
-<div class="rposts">
-    <h4>Recent Posts</h4>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="rpost1">
-                <div class="rimg">
-                    <img src="img/photos/r1.jpg" alt="" class="img-responsive" />
-                </div>
-                <!-- Title & Para -->
-                <div class="rdetails">
-                    <h5>Lorem ipsum</h5>
-                    <p>Duis vulputate consectetur malesuada et in dictum nisi vehicula.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="rpost1">
-                <div class="rimg">
-                    <img src="img/photos/r2.jpg" alt="" class="img-responsive" />
-                </div>
-                <div class="rdetails">
-                    <h5>Lorem ipsum</h5>
-                    <p>Duis vulputate consectetur malesuada et netus et in dictum nisi vehicula.</p>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="rpost1">
-                <div class="rimg">
-                    <img src="img/photos/r3.jpg" alt="" class="img-responsive" />
-                </div>
-                <div class="rdetails">
-                    <h5>Lorem ipsum</h5>
-                    <p>Duis vulputate consectetur malesuada et in dictum nisi vehicula.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="rpost1">
-                <div class="rimg">
-                    <img src="img/photos/r4.jpg" alt="" class="img-responsive" />
-                </div>
-                <div class="rdetails">
-                    <h5>Lorem ipsum</h5>
-                    <p>Duis vulputate consectetur malesuada et netus et in dictum nisi vehicula.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Recent post ends -->
-
-
-<!-- Clients starts -->
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="clients">
-            <img src="img/clients/amazon_b.png" alt="" />
-            <img src="img/clients/google_b.png" alt="" />
-            <img src="img/clients/twitter_b.png" alt="" />
-            <img src="img/clients/facebook_b.png" alt="" />
-            <img src="img/clients/skype_b.png" alt="" />
-            <img src="img/clients/youtube_b.png" alt="" />
-        </div>
-    </div>
-</div>
-
-<!-- Clients ends -->
 
 </div>
 </div>

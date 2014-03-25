@@ -1,11 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:10 PM
- */
-?>
+
 <!-- Content strats -->
 
 <div class="content">

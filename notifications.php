@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:12 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/06/2014  AH              INITIAL CREATION
+ *      03/10/2014  AH              ADDED JQUERY EVENTS
  */
 include('functions/header.php');
 include('functions/footer.php');

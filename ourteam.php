@@ -1,11 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:14 PM
- */
-?>
+
 <!-- Content strats -->
 
 <div class="content">
@@ -89,25 +82,6 @@
                 </div>
 
                 <!-- About ends -->
-
-                <!-- CTA starts -->
-
-                <div class="cta">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <!-- First line -->
-                            <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
-                            <!-- Second line -->
-                            <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
-                        </div>
-                        <div class="col-md-2">
-                            <!-- Button -->
-                            <div class="button"><a href="#">Get A Free Trail</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Ends -->
 
             </div>
         </div>

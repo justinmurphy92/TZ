@@ -1,11 +1,17 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/11/2014
- * Time: 8:44 PM
- * put fname lname, userid and type code
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/11/2014  JM              INITIAL CREATION
+ *      03/12/2014  JM              ADDED TUTOR REGISTRATION
+ *      03/24/2014  JM              ADDED ERROR HANDLING
+ *
+ * DESCRIPTION:
+ * THIS IS THE FINAL REGISTRATION PAGE WHERE TUTORS AND STUDENT ARE BOTH ADDED TO THE DATABASE
  */
+
+//start session and include DB class
 session_start();
 include('functions/database.php');
 $db = connectToDB();
@@ -69,6 +75,7 @@ if($type == "Student"){
                 $picture;
             }
             catch(Exception $e){
+                //catch exception and write to log
                 writeLog('IMG', $e);
             }
         }
@@ -97,6 +104,7 @@ if($type == "Student"){
             }
         }
         catch (PDOException $e){
+            //catch exception and write to log
             writelog('DB',$e);
         }
 
@@ -104,7 +112,7 @@ if($type == "Student"){
 }
 elseif ($type == 'Tutor'){
     if(empty($address) || empty($city) || empty($postalcode) || empty($bio) || empty($subject)){
-        //header('Location: register_tutor.php?error=2');
+        header('Location: register_tutor.php?error=2');
     }
     else{
         //prepare query
@@ -157,6 +165,7 @@ elseif ($type == 'Tutor'){
             $query->execute();
         }
         catch (PDOException $e){
+            //catch exception write to log
             writelog('DB',$e);
         }
 
@@ -167,7 +176,7 @@ elseif ($type == 'Tutor'){
         $row = $rs->fetch(PDO::FETCH_ASSOC);
         $subjectID = $row['subject_id'];
 
-
+        //prepare query
         $sql = "INSERT INTO expertise (tutor_id, subject_id) VALUE (:tutorID, :subjectID)";
         $query = $db->prepare($sql);
         $query->bindValue(':tutorID', $userid);
@@ -189,6 +198,7 @@ elseif ($type == 'Tutor'){
 
         }
         catch (PDOException $e){
+            //catch exception and write log
             writelog('DB', $e);
         }
 

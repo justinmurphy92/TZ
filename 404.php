@@ -1,9 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 3/6/2014
- * Time: 6:12 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/06/2014  AH              INITIAL CREATION
+ *
+ * DESCRIPTION:
+ * A SIMPLE 404 PAGE TO BE DISPLAYED WHEN THE USER TRIES TO NAVIGATE TO A PAGE THAT DOES NOT EXIST
+ *
  */
 include('functions/footer.php');
 include('functions/header.php');

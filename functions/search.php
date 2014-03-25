@@ -1,9 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/20/2014
- * Time: 8:19 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/18/2014  JM              INITIAL CREATION
+ *      03/19/2014  JM              ADDED REDIRECT TO SEARCH RESULTS
+ *
+ * DESCRIPTION:
+ * THIS CLASS WILL TAKE THE DATA PASSED FROM THE SEARCH BAR AND QUERY BOTH STUDENT AND TUTOR DATA.
+ * IT WILL THEN PASS THE MATCHES TO THE SEARCH RESULTS PAGE FOR FURTHUR PROCESSING
  */
 session_start();
 include('../functions/database.php');

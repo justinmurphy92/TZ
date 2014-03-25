@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/16/2014
- * Time: 8:44 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/16/2014  JM              INITIAL CREATION
  */
 //start session and open DB connection
 session_start();

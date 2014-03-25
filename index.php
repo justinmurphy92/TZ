@@ -1,10 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:12 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/06/2014  JM              INITIAL CREATION
+ *      03/08/2014  AH              ADDED CONTENT
+ *      03/12/2014  AH              ADDED TESTIMONIALS
+ *      03/16/2014  AH              ADJUSTED CONTENT
+ *
+ * DESCRIPTION:
+ *
+ * THIS IS THE TUTLEZONE "MAINLINE" IT IS THE FIRST POINT OF ENTRY FOR USERS.
  */
+
+//include needed classes
 include('functions/header.php');
 include('functions/footer.php');
 include('functions/navbar.php');
@@ -158,11 +167,13 @@ displayNavigation();
                     <div class="container">
                         <div class="row">
                             <?php
+                            //connect to database
                             $db = connectToDB();
                             if ($db)
                             {
                               try{
                                   $sql = "SELECT * FROM testimonials ORDER BY RAND() LIMIT 3";
+                                  //get 3 testimonials and display them
                                   foreach ($db->query($sql) as $row)
                                   {
                                       echo "<div class='col-md-4 col-sm-4'>";
@@ -178,6 +189,7 @@ displayNavigation();
                                   }
 
                               }catch(PDOException $e){
+                                //catch exception and write to log
                                 writeLog('DB', $e);
                               }
                             }

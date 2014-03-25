@@ -1,4 +1,16 @@
 <?php
+/**
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/10/2014  JM              INITIAL CREATION
+ *
+ * DESCRIPTION:
+ * THIS IS THE FIRST REGISTER PAGE, FROM HERE, THE USER IS REDIRECTED TO APPROPRIATE SECOND PAGE BASED ON
+ * WHETHER THEY CHOSE STUDENT OR TUTOR
+ */
+
+//include required classes
 include('functions/footer.php');
 include('functions/header.php');
 include('functions/navbar.php');
@@ -112,25 +124,6 @@ displayNavigation(0);
                 </div>
 
                 <!-- Login ends -->
-
-                <!-- CTA starts -->
-
-                <div class="cta">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <!-- First line -->
-                            <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
-                            <!-- Second line -->
-                            <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
-                        </div>
-                        <div class="col-md-2">
-                            <!-- Button -->
-                            <div class="button"><a href="#">Get A Free Trail</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Ends -->
 
             </div>
         </div>

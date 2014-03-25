@@ -1,9 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 12/03/14
- * Time: 6:06 PM
+ * Programmer:      Adam Howatt
+ * Analyst:         Justin Murphy
+ *      DATE        INITIAL     CHANGES
+ *      03/12/2014  AH          INITIAL CREATION
+ *      03/13/2014  AH          FIXED JSON ERRORS
+ *      03/13/2014  AH          ADDED DB ERROR
  */
 session_start();
 include('../functions/database.php');

@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 12/03/14
- * Time: 6:06 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/12/2014  AH              INITIAL CREATION
  */
 session_start();
 include('../functions/database.php');

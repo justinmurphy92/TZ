@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 12/03/14
- * Time: 6:06 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *
+ *      DATE        INITIALS        CHANGES
+ *      03/12/2014  AH              INITIAL CREATION
+ *      03/24/2014  JM              ADDED TRANSACTION ID TO LESSON INSERT
+ *
  */
 session_start();
 include('../functions/database.php');
@@ -37,8 +40,8 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonMatchID'])){
                     // store the student ID so we can create a notification if everything else goes well.
                     $studentID = $row['student_userid'];
                 }
-
-                $insertSQL = "INSERT INTO lesson(match_id, subject_id, lesson_date, lesson_length, lesson_title, lesson_desc, lesson_location, lesson_comments) VALUES(:matchID, :subjectID, unix_timestamp(:lessonDate), :length, :title, :desc, :location, :comments)";
+                $transID = createTransaction($_POST['lessonMatchID'], $_POST['lessonLength'], $_POST['lessonDate']);
+                $insertSQL = "INSERT INTO lesson(match_id, subject_id, lesson_date, lesson_length, lesson_title, lesson_desc, lesson_location, lesson_comments, transaction_id) VALUES(:matchID, :subjectID, unix_timestamp(:lessonDate), :length, :title, :desc, :location, :comments, :tranID)";
                 // if we got here, the user is authorized, so let's update the lesson
                 $insertQuery = $db->prepare($insertSQL);
                 $insertQuery->bindValue(':matchID', $_POST['lessonMatchID']);
@@ -49,6 +52,7 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonMatchID'])){
                 $insertQuery->bindValue(':desc', $_POST['lessonDesc']);
                 $insertQuery->bindValue(':location', $_POST['lessonLocation']);
                 $insertQuery->bindValue(':comments', $_POST['lessonComments']);
+                $insertQuery->bindValue(':tranID', $transID);
 
 
                 // if it executes successfully
@@ -59,7 +63,7 @@ if (isset($_SESSION['USERID']) && isset($_POST['lessonMatchID'])){
                     $date = DateTime::createFromFormat("Y-m-d H:i", $_POST['lessonDate']);
 
                     $content = "A lesson has been scheduled between you and " . $_SESSION['FNAME'] . " " . $_SESSION['LNAME'] . ". It is scheduled for: " . $date->format('D, M jS @ g:ia');
-                    createTransaction($_POST['lessonMatchID'], $_POST['lessonLength'], $_POST['lessonDate']);
+
                     insertNotification($studentID, $content);
 
                     echo "success";

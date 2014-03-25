@@ -1,9 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/6/2014
- * Time: 6:13 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/06/2014  AH              INITIAL CREATION
+ *      03/12/2014  ah              ADDED JQUERY EVENTS
+ *
+ * DESCRIPTION:
+ * THIS PAGE HANDLES THE LESSON SECTION.
  */
 include('functions/header.php');
 include('functions/footer.php');

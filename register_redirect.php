@@ -1,15 +1,21 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/11/2014
- * Time: 8:18 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/11/2014  JM              INITIAL CREATION
+ *      03/24/2014  JM              ADDED ERROR HANDLING
  */
+
+//include database class
 include ('functions/database.php');
 
+
+//connect to db and start session
 $db = connectToDB();
 session_start();
 
+//move form data to working storage
 $fname = trim($_POST['fname']);
 $lname = trim($_POST['lname']);
 $email = trim($_POST['email']);
@@ -32,9 +38,11 @@ catch (PDOException $e){
 }
 
 if (empty($fname) || empty($lname) || empty($email) || empty($username) || empty($password) || empty($vPassword) || empty($type) || !isset($_POST['terms']) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $password <> $vPassword || $count > 0 ){
+    //redirect back to register with error
     header('Location: register.php?error=3');
 }
 else{
+    //save working storage to the session so it can be seen on the next page
     $_SESSION['fname'] = $fname;
     $_SESSION['lname'] = $lname;
     $_SESSION['email'] = $email;
@@ -43,6 +51,7 @@ else{
     $_SESSION['type'] = $type;
     $_SESSION['terms'] = "TRUE";
 
+    //redirect to register page 2 based on user type
     if($type == "Student"){
         header('Location: register_student.php');
     }

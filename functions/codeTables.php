@@ -1,9 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 20/03/14
- * Time: 10:17 PM
+ * Programmer:  Adam Howatt
+ * Analyst:     Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/20/2014  AH              INITIAL CREATION
+ *      03/21/2014  AH              ADDED LOAD MATCHES
+ *
  * This file exists to load each of the code tables into session scope, so they can be used throughout the website.
  */
 

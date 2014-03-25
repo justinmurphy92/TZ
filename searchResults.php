@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/20/2014
- * Time: 8:27 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/20/2014  JM              INITIAL CREATION
  */
 
 include('functions/footer.php');
@@ -68,25 +68,6 @@ displayNavigation(0);
 
 
                 <!-- FAQ ends -->
-
-                <!-- CTA starts -->
-
-                <div class="cta">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <!-- First line -->
-                            <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
-                            <!-- Second line -->
-                            <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
-                        </div>
-                        <div class="col-md-2">
-                            <!-- Button -->
-                            <div class="button"><a href="#">Get A Free Trail</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Ends -->
 
             </div>
         </div>

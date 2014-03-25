@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: justinmurphy
- * Date: 3/23/2014
- * Time: 4:22 PM
+ * Programmer:  Justin Murphy
+ * Analyst:     Adam Howatt
+ *      DATE        INITIALS        CHANGES
+ *      03/22/2014  JM              INITIAL CREATION
  */
 include('functions/header.php');
 include('functions/footer.php');
@@ -90,26 +90,6 @@ catch (PDOException $e) {
 
 
                     <!-- FAQ ends -->
-
-                    <!-- CTA starts -->
-
-                    <div class="cta">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <!-- First line -->
-                                <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
-                                <!-- Second line -->
-                                <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
-                            </div>
-                            <div class="col-md-2">
-                                <!-- Button -->
-                                <div class="button"><a href="#">Get A Free Trail</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CTA Ends -->
-
                 </div>
             </div>
         </div>

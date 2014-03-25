@@ -1,9 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Howatt
- * Date: 12/03/14
- * Time: 6:06 PM
+ * Programmer:      Adam Howatt
+ * Analyst:         Justin Murphy
+ *      DATE        INITIALS        CHANGES
+ *      03/12/2014  AH              INITIAL CREATION
+ *      03/13/2014  AH              FIXED JSON ERRORS
+ *
  * Used to return a list of the user's lessons over the next 24 hours.
  */
 session_start();
