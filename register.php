@@ -100,7 +100,7 @@ displayNavigation(0);
                                         <div class="form-group">
                                             <div class="col-md-8 col-md-offset-3">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" id="inlineCheckbox1" value="agree" name="terms"/> <a href="term.html" target="_blank">Agree with Terms and Conditions</a>
+                                                    <input type="checkbox" id="inlineCheckbox1" value="agree" name="terms"/> <a href="term.php" target="_blank">Agree with Terms and Conditions</a>
                                                 </label>
                                             </div>
                                         </div>
