@@ -98,8 +98,8 @@ if($type == "Student"){
             if($query->execute()){
                 $_SESSION['USERID'] = $userid;
                 $_SESSION['TYPECODE_ID'] = 1;
-                $_SESSION['fname'] = $fname;
-                $_SESSION['lname'] = $lname;
+                $_SESSION['FNAME'] = $fname;
+                $_SESSION['LNAME'] = $lname;
                 header('Location: index.php');
             }
         }

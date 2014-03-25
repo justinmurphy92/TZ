@@ -10,9 +10,8 @@
  */
 
 //start session and include required classes
-session_start();
-include('functions/footer.php');
 include('functions/header.php');
+include('functions/footer.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
