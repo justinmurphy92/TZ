@@ -124,6 +124,7 @@ function loadLessonStatus() {
                 //default to null (avoids duplication on reload)
                 $_SESSION['lesson_status'] = null;
 
+                // load only the active statuses (incase they change)
                 $sql = "SELECT * FROM statuscode where statuscode_active = true order by statuscode_abbr";
                 $query = $db->query($sql);
                 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {

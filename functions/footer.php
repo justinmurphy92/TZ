@@ -156,6 +156,18 @@ function displayFooter() {
             });
 
             $(function() {
+                $('#startDate').datepicker({
+                    dateFormat: 'yy-mm-dd'
+                });
+            });
+
+            $(function() {
+                $('#endDate').datepicker({
+                    dateFormat: 'yy-mm-dd'
+                });
+            });
+
+            $(function() {
                 $('#lessonDate').datetimepicker({
                     stepMinute: 15,
                     dateFormat: 'yy-mm-dd'
