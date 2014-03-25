@@ -86,11 +86,17 @@ function createTransaction($match, $length, $date){
         $lessonTotal = $length * $row['match_rop'];
 
         try{
-            $sql = "INSERT INTO transaction(match_id, transaction_amount, transaction_date, method_id) VALUE (:matchID, :amount, :tranDate)";
+            $sql = "INSERT INTO transactions (match_id, transaction_amount, transaction_date, method_id) VALUE (:matchID, :amount, :tranDate, :methodID)";
             $query = $db->prepare($sql);
             $query->bindValue(':matchID', $match);
             $query->bindValue(':amount', $lessonTotal);
             $query->bindValue(':tranDate', $date);
+            $query->bindValue(':methodID', 0);
+
+            $query->execute();
+
+            return $db->lastInsertId();
+
         }
         catch (PDOException $e){
             writeLog('DB', $e);

@@ -8,6 +8,9 @@
  */
 session_start();
 $userType = '';
+$failed;
+$locked;
+
 
 include('functions/database.php');
 $db = connectToDB();
@@ -24,6 +27,8 @@ try{
     $row = $rs->fetch(PDO::FETCH_ASSOC);
     $_SESSION['USERID'] = $row['CREDENTIALS_USERID'];
     $_SESSION['TYPECODE_ID'] = $row['TYPECODE_ID'];
+    $failed = $row['CREDENTIALS_FAILED_ATTEMPTS'];
+    $locked = $row['CREDENTIALS_LOCKED'];
 }
 
 catch (PDOException $e){
@@ -35,6 +40,10 @@ if($row['TYPECODE_ID'] == '1' || $row['TYPECODE_ID'] == 1){
 }
 elseif ($row['TYPECODE_ID'] == '2' || $row['TYPECODE_ID'] == 2){
     $userType = 'tutor';
+}
+else{
+    header('Location: login.php?error=1');
+
 }
 
 
@@ -52,10 +61,8 @@ catch (PDOException $e){
 }
 
 if($rs->columnCount() > 0){
+
     header('Location: index.php');
     exit;
 }
-else{
-    header('Location: login.php');
-    exit;
-}
+

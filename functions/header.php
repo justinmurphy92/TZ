@@ -57,4 +57,18 @@ function displayHeader($title = "TutleZone") {
 
 <?php
 } // end header function
+if(isset($_GET['error'])){
+    switch($_GET['error']){
+        case 1:
+            echo "<script>alert('Invalid Username or Password')</script>";
+            break;
+        case 2:
+            "<script>alert('Make sure to fill out all required fields!')</script>";
+            break;
+        case 3:
+            "<script>alert('Things to check: \n 1) All fields are full \n 2)Passwords match \n 3)email is valid')</script>";
+            break;
+
+    }
+}
 ?>

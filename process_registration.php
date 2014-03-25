@@ -34,7 +34,7 @@ elseif(isset($_POST['bio'])){
 if($type == "Student"){
     //input validation
     if(empty($address) || empty($city) || empty($postalcode) || empty($about)){
-        header('Location: register_student.php');
+        header('Location: register_student.php?error=2');
     }
     else{
         //prepare query
@@ -104,7 +104,7 @@ if($type == "Student"){
 }
 elseif ($type == 'Tutor'){
     if(empty($address) || empty($city) || empty($postalcode) || empty($bio) || empty($subject)){
-        //header('Location: register_tutor.php');
+        //header('Location: register_tutor.php?error=2');
     }
     else{
         //prepare query
