@@ -11,13 +11,16 @@
  */
 
 //start session and include the required classes
-session_start();
-include('functions/footer.php');
 include('functions/header.php');
+include('functions/footer.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
 
+if (!isset($_SESSION['USERID'])) {
+    header("Location: index.php");
+    exit;
+}
 
 displayHeader('TutleZone - Home');
 displayUserArea(0);

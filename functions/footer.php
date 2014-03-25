@@ -378,7 +378,7 @@ function displayFooter() {
                                 }
                                 else{
                                     $('.ui-dialog-content').dialog('close');
-                                    alert("Failure");;
+                                    alert("Failure");
                                 }
                             }
                         )
