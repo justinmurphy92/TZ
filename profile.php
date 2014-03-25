@@ -12,7 +12,7 @@ include('functions/userProfile.php');
 include('functions/database.php');
 
 
-displayHeader('TutleZone - Home');
+displayHeader('TutleZone - Profile');
 displayUserArea(0);
 displayNavigation(0);
 $db = connectToDB();

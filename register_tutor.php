@@ -18,7 +18,7 @@ include('functions/database.php');
 include('functions/codeTables.php');
 
 
-displayHeader('TutleZone - Home');
+displayHeader('TutleZone - Tutor Registration');
 displayUserArea(0);
 displayNavigation(0);
 ?>

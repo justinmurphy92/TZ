@@ -11,8 +11,10 @@
  */
 include('functions/footer.php');
 include('functions/header.php');
+include('functions/database.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
+include('functions/database.php');
 
 displayHeader('TutleZone - 404!');
 displayUserArea(0);

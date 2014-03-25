@@ -17,7 +17,7 @@ include('functions/userProfile.php');
 include('functions/database.php');
 
 
-displayHeader('TutleZone - Home');
+displayHeader('TutleZone - View Profile');
 displayUserArea();
 displayNavigation();
 

@@ -16,7 +16,7 @@ include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
 
-displayHeader('TutleZone - Home');
+displayHeader('TutleZone - Search Results');
 displayUserArea(0);
 displayNavigation(0);
 ?>

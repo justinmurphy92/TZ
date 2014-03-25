@@ -47,9 +47,9 @@ function writeLog($errorClass, $e){
 // used to connect to the DB And return the connection string
 function connectToDB() {
     try{
-        $name = 'TutleZone';
-        $pass ='Passw0rd!';
-        $DBcon = new PDO('mysql:host=TutleZone.db.11939703.hostedresource.com;dbname=TutleZone',$name, $pass);
+        $name = 'tutleZ0N3b0t';
+        $pass ='0kj531G@81jd01951mma2';
+        $DBcon = new PDO('mysql:host=localhost;dbname=TutleZone',$name, $pass);
     }
     catch (PDOException $e){
 

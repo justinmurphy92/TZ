@@ -22,7 +22,7 @@ if (!isset($_SESSION['USERID'])) {
     exit;
 }
 
-displayHeader('TutleZone - Home');
+displayHeader('TutleZone - Edit Profile');
 displayUserArea(0);
 displayNavigation(0);
 

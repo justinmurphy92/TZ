@@ -10,28 +10,29 @@
  * DESCRIPTION:
  * THIS PAGE IS FOR TUTORS TO CREATE PAYMENTS AND VIEW PAST PAYMENTS
  */
+include('functions/header.php');
 
 // guests shouldn't be here.
 if (!isset($_SESSION['USERID'])) {
-    header("Location: index.php");
+    header("Location: index.php?re=1");
     exit;
 }
 
 // neither should students.
 if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 1) {
-    header("Location: index.php");
+    header("Location: index.php?re=2");
     exit;
 }
 //include needed classes
 include('functions/footer.php');
-include('functions/header.php');
+
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
 include('functions/codeTables.php');
 
 
-displayHeader('TutleZone - Home');
+displayHeader('TutleZone - Payments');
 displayUserArea(0);
 displayNavigation(0);
 ?>
