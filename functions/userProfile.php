@@ -38,7 +38,7 @@ function displayUserArea() {
                                     <?php
                                     if ($LOGGED_IN){
                                     ?>
-                                    <li><a href="myProfile.php"><i class="icon-gear"></i> PROFILE</a></li>
+                                    <li><a href="profile.php"><i class="icon-gear"></i> PROFILE</a></li>
                                     <li><a href="logout.php"><i class="icon-ban-circle"></i> LOGOUT</a></li>
                                     <?php
                                     } // END LOGGED IN OPTIONS
