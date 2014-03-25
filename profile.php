@@ -5,9 +5,8 @@
  * Date: 3/16/2014
  * Time: 2:18 PM
  */
-session_start();
-include('functions/footer.php');
 include('functions/header.php');
+include('functions/footer.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
@@ -48,7 +47,7 @@ catch (PDOException $e) {
 
                 <div class="support col-md-6">
                     <div class="scontact">
-                        <img scr="data:image/png; base64,<?php echo base64_decode($row[$userType.'_picture']); ?>"/>
+                        <img src="img/profile.png" alt="Picture Placeholder"/>
                     </div>
                 </div>
 
@@ -82,28 +81,6 @@ catch (PDOException $e) {
 
                         </div>
 
-
-
-                <!-- FAQ ends -->
-
-                <!-- CTA starts -->
-
-                <div class="cta">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <!-- First line -->
-                            <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
-                            <!-- Second line -->
-                            <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
-                        </div>
-                        <div class="col-md-2">
-                            <!-- Button -->
-                            <div class="button"><a href="#">Get A Free Trail</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Ends -->
 
             </div>
         </div>

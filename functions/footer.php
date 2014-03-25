@@ -87,7 +87,7 @@ function displayFooter() {
 
         function doIt(element){
             var elementI = element.children[0];
-            
+
             if (elementI.classList.contains('notifUnread')) {
                 $.post("ajax/markNotificationRead.php",{notifID:element.id},
                     function(data) {
@@ -369,28 +369,23 @@ function displayFooter() {
                 modal: true,
                 buttons: {
                     "Submit Payment": function() {
-                        alert($( "#paymentForm" ).serialize());
-                        /*$.post("ajax/sickDay.php",$( "#sickForm" ).serialize(),
+                        //alert($( "#paymentForm" ).serialize());
+                        $.post("ajax/createPayment.php",$( "#paymentForm" ).serialize(),
                             function(data) {
-                                if (data == 'error' || data == 'failure') {
+                                if (data == 'success') {
                                     $('.ui-dialog-content').dialog('close');
-                                    alert("Could not process your request.");
-                                }
-                                else if (data == 'missing') {
-                                    $('.ui-dialog-content').dialog('close');
-                                    alert("Not all required fields were filled in.");
+                                    alert("Payment Added Successfully.");
                                 }
                                 else{
-                                    $('#calendar').fullCalendar('refetchEvents');
                                     $('.ui-dialog-content').dialog('close');
-                                    alert("Sick Day Request Successful. " + data + " Lessons Cancelled.");
+                                    alert("Failure");;
                                 }
                             }
                         )
                             .fail( function(xhr, textStatus, errorThrown) {
                                 // this is a failsafe for any network issues as the above will not capture it.
                                 alert("An Unknown Error Occured!");
-                            }) */
+                            })
                     },
                     Cancel: function() {
                         $( this ).dialog( "close" );

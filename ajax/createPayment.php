@@ -20,7 +20,7 @@ if($db){
     if(!empty($_POST['methodID']) || !empty($_POST['matchID']) || !empty($_POST['amount']) || !empty($_POST['date'])){
         $sql = "INSERT INTO transactions (match_id, transaction_amount, transaction_date, transaction_notes, method_id) VALUES (:matchID, :tranAmount, :tranDate, tranNote, :methodID)";
         $query = $db->prepare($sql);
-        $query->bindValue(':matchID', $_POST['methodID']);
+        $query->bindValue(':matchID', $_POST['matchID']);
         $query->bindValue(':tranAmount', $_POST['amount']);
         $query->bindValue(':tranDate', $_POST['date']);
         $query->bindValue(':tranNote', $_POST['notes']);
@@ -29,7 +29,9 @@ if($db){
         try{
             //if query executes, redirect to payment page
             if($query->execute()){
-                header('Location: payments.php');
+                echo "success";
+                exit;
+
             }
 
         }
@@ -39,3 +41,4 @@ if($db){
         }
     }
 }
+echo "failure";
