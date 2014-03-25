@@ -11,6 +11,17 @@
  * THIS PAGE IS FOR TUTORS TO CREATE PAYMENTS AND VIEW PAST PAYMENTS
  */
 
+// guests shouldn't be here.
+if (!isset($_SESSION['USERID'])) {
+    header("Location: index.php");
+    exit;
+}
+
+// neither should students.
+if (isset($_SESSION['TYPECODE_ID']) && $_SESSION['TYPECODE_ID'] == 1) {
+    header("Location: index.php");
+    exit;
+}
 //include needed classes
 include('functions/footer.php');
 include('functions/header.php');

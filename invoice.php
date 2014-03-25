@@ -308,7 +308,7 @@ if (isset($_POST['submit']) && isset($_SESSION['USERID'])) {
                                  <div class="tquote">
 
                                      <?php
-                                     if (count($transactions) > 0) {
+                                     if (isset($transactions) && count($transactions) > 0) {
                                          $paymentTotal = 0.0;
                                          $chargeTotal = 0.0;
                                          $balance = 0.0;
