@@ -527,7 +527,7 @@ position:relative;
 margin:20px 0px;
 }
 
-.service{
+.invoice{
 background:#fff;
 padding:3px 10px;
 border:1px solid #e7e7e7;
@@ -536,13 +536,13 @@ border-radius:5px;
 border-bottom:3px solid #eee;
 }
 
-.service h5{
+.invoice h5{
 padding:3px 0px 8px 0px;
 margin:3px 0px 4px 0px;
 border-bottom:1px solid #f1f1f1;
 }
 
-.service i{
+.invoice i{
 font-size:20px;
 margin-top:3px;
 margin-right:8px;
@@ -1132,16 +1132,6 @@ color:#fff;
 
 /* Service page*/
 
-.serv-a{
-width:48%;
-float:left;
-margin-right:10px;
-}
-
-.serv-b{
-width:48%;
-float:right;
-}
 
 .serv{
 padding:5px 10px;
@@ -1225,6 +1215,7 @@ font-weight:700;
 color:#888;
 line-height:35px;
 }
+.ui-datepicker{ z-index: 9999 !important;}
 
 /**** Isotope Filtering ****/
 

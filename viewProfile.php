@@ -40,10 +40,10 @@ catch (PDOException $e) {
     <div class="content">
         <div class="container">
                     <?php
-                    if ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1){
+                    if (isset($_SESSION['USERID']) && ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1)){
                         echo "<div class='button'><a href='requestMatch.php?user=".$_GET['userid']."'>ASK TO BE YOUR TUTOR </a></div>";
                     }
-                    elseif($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2){
+                    elseif(isset($_SESSION['USERID']) && ($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2)){
                         echo "<div class='button'><a href='requestMatch.php?user=".$_GET['userid']."'>ASK TO BE YOUR TUTOR </a></div>";
                     }
                     ?>
@@ -54,7 +54,7 @@ catch (PDOException $e) {
 
                     <div class="support col-md-6">
                         <div class="scontact">
-                            <img scr="data:image/png; base64,<?php echo base64_decode($row[$userType.'_picture']); ?>"/>
+                            <img src="img/profile.png" alt="Picture Placeholder"/>
                         </div>
                     </div>
 
