@@ -83,15 +83,13 @@ displayNavigation();
                         <div class="col-md-5">
                             <div class="main-box">
                                 <h4>Feature Highlight - Scheduling! </h4>
-                                <p>Let's look at one of the features of TutleZone: </p>
+                                <p>Let's look at one of the features of TutleZone: Scheduling </p>
                                 <ul>
-                                    <li>feature #1</li>
-                                    <li>feature #2</li>
-                                    <li>feature #3</li>
+                                    <li>Manage your schedule with as many students/tutors as you can handle.</li>
+                                    <li>Keep track of who has paid, and who owes you money.</li>
+                                    <li>Generate invoices easily, and on-demand.</li>
                                 </ul>
-                                <div class="button">
-                                    <a href="#"><i class="icon-shopping-cart"></i> Buy Now</a> <a href="#"><i class="icon-magic"></i> Try Now</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -110,7 +108,7 @@ displayNavigation();
                         <div class="col-md-2">
                             <!-- Button -->
                             <br/>
-                            <div class="button"><a href="#">Register Now!</a></div>
+                            <div class="button"><a href="register.php">Register Now!</a></div>
                         </div>
                     </div>
                 </div>

@@ -87,8 +87,8 @@ function displayFooter() {
 
         function doIt(element){
             var elementI = element.children[0];
-
-            if (elementI.className.contains('notifUnread')) {
+            
+            if (elementI.classList.contains('notifUnread')) {
                 $.post("ajax/markNotificationRead.php",{notifID:element.id},
                     function(data) {
                         if (data == 'worked') {
