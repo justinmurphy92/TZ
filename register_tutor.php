@@ -10,12 +10,12 @@
  */
 
 //start session and include required classes
-session_start();
-include('functions/footer.php');
 include('functions/header.php');
+include('functions/footer.php');
 include('functions/navbar.php');
 include('functions/userProfile.php');
 include('functions/database.php');
+include('functions/codeTables.php');
 
 
 displayHeader('TutleZone - Home');
@@ -97,14 +97,13 @@ displayNavigation(0);
                                             <label class="control-label col-md-3" for="select">Subject</label>
                                             <div class="col-md-9" >
                                                 <select class="form-control" id="select" name="subject">
-                                                    <option>&nbsp;</option>
-                                                    <option>Music</option>
-                                                    <option>Math</option>
-                                                    <option>Mamography</option>
-                                                    <option>Mechanics</option>
-                                                    <option>Mechanical Eng</option>
-                                                    <option>Mastery of The</option>
-                                                    <option>Marketing</option>
+                                                    <?php
+                                                    if (loadSubjects()){
+                                                        foreach($_SESSION['subjects'] as $thisSubject){
+                                                            echo "<option value='" . $thisSubject['id'] . "'>" . $thisSubject['name'] . "</option>";
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                             <p align="center" style="padding-left:100px">Choose one for now. You can add more later!</p>
