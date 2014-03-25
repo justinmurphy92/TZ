@@ -18,7 +18,7 @@ $db = connectToDB();
 //if there is a database connection and all fields are populated, start binding to the query
 if($db){
     if(!empty($_POST['methodID']) || !empty($_POST['matchID']) || !empty($_POST['amount']) || !empty($_POST['date'])){
-        $sql = "INSERT INTO transactions (match_id, transaction_amount, transaction_date, transaction_notes, method_id) VALUES (:matchID, :tranAmount, :tranDate, tranNote, :methodID)";
+        $sql = "INSERT INTO transactions (match_id, transaction_amount, transaction_date, transaction_notes, method_id) VALUES (:matchID, :tranAmount, :tranDate, :tranNote, :methodID)";
         $query = $db->prepare($sql);
         $query->bindValue(':matchID', $_POST['matchID']);
         $query->bindValue(':tranAmount', $_POST['amount']);
