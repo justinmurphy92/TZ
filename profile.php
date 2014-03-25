@@ -1,15 +1,10 @@
 <?php
 /**
- * Programmer:  Justin Murphy
- * Analyst:     Adam Howatt
- *      DATE        INITIALS        CHANGES
- *      03/16/2014  JM              INITIAL CREATION
- *
- * DESCRIPTION:
- * THIS PAGE WILL DYNAMICALLY CREATE A PROFILE PAGE
+ * Created by PhpStorm.
+ * User: justinmurphy
+ * Date: 3/16/2014
+ * Time: 2:18 PM
  */
-
-//start session and include classes
 session_start();
 include('functions/footer.php');
 include('functions/header.php');
@@ -21,7 +16,6 @@ include('functions/database.php');
 displayHeader('TutleZone - Home');
 displayUserArea(0);
 displayNavigation(0);
-//connect to database and declare local variables
 $db = connectToDB();
 $userType;
 
@@ -31,17 +25,15 @@ if ($_SESSION['TYPECODE_ID'] == '1' || $_SESSION['TYPECODE_ID'] == 1){
 elseif($_SESSION['TYPECODE_ID'] == '2' || $_SESSION['TYPECODE_ID'] == 2){
     $userType = 'tutor';
 }
-//prepare query
-$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = ".$_SESSION['USERID'];
 
+$sql = "SELECT * FROM ".$userType." WHERE credentials_userid = ".$_SESSION['USERID'];
+//$sql = "SELECT * FROM tutor WHERE credentials_userid = 18";
 
 try{
-    //execute query
     $rs = $db->query($sql);
     $row = $rs->fetch(PDO::FETCH_ASSOC);
 }
 catch (PDOException $e) {
-    //catch exception and write to log
     writeLog('DB', $e);
 }
 ?>
@@ -64,7 +56,6 @@ catch (PDOException $e) {
                             <h4>Profile Information<a href="editProfile.php" class="icon-edit-sign"></a></h4>
                             <hr />
                             <p>
-                                <!--build profile page -->
                                 <strong>First Name: </strong><?php echo $row[$userType.'_fname'];?><br/>
                                 <strong>Last Name: </strong><?php echo $row[$userType.'_lname'];?><br/>
                                 <strong>Address: </strong><?php echo $row[$userType.'_address'];?><br/>
@@ -94,6 +85,25 @@ catch (PDOException $e) {
 
 
                 <!-- FAQ ends -->
+
+                <!-- CTA starts -->
+
+                <div class="cta">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <!-- First line -->
+                            <p class="cbig">Lorem ipsum consectetur dolor sit amet, consectetur adipiscing.</p>
+                            <!-- Second line -->
+                            <p class="csmall">Duis vulputate consectetur malesuada eros nec odio consect eturegestas et netus et in dictum nisi vehicula.</p>
+                        </div>
+                        <div class="col-md-2">
+                            <!-- Button -->
+                            <div class="button"><a href="#">Get A Free Trail</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Ends -->
 
             </div>
         </div>
