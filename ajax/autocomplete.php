@@ -55,8 +55,8 @@ $resultArray = array();
             while($row =  $query->fetch(PDO::FETCH_ASSOC)){
                 //write results to array
                 $resultArray[]= array('id'=> $row['credentials_userid'],
-                    'value'=> $row['credentials_userid'],
-                    'label'=>  $row['tutor_fname']);
+                    'value'=>  $row['tutor_fname']. " ". $row['tutor_lname'],
+                    'label'=>  $row['tutor_fname']. " ". $row['tutor_lname']);
             }
         }
     }
